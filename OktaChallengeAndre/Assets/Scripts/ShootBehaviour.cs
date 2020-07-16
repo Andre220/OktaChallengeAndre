@@ -18,7 +18,5 @@ public class ShootBehaviour : MonoBehaviour
     void ShootBullet()
     {
         GameObject bulletInstance = Instantiate(equipedBulletInfo.BulletPrefab, firePosition.position, firePosition.rotation);
-        bulletInstance.GetComponent<Rigidbody2D>().AddForce(firePosition.up * equipedBulletInfo.BulletSpeed / 1000, ForceMode2D.Impulse);
-        bulletInstance.GetComponent<BulletBehaviour>().Damage = equipedBulletInfo.Damage;
     }
 }
