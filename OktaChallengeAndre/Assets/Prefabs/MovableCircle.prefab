@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 4309864185419153179}
   - component: {fileID: 4309864185419153176}
   - component: {fileID: 4309864185419153181}
-  - component: {fileID: 4309864185419153180}
-  - component: {fileID: 4309864185419153177}
   m_Layer: 0
   m_Name: MovableCircle
   m_TagString: Untagged
@@ -99,33 +97,9 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   isStatic: 0
   bounce: 1
-  CircleRadius: 0
-  CircleDiameter: 0
---- !u!114 &4309864185419153180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4309864185419153174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c847ac7cdd187fb46a8b0a5d703d4f7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneCollidables: []
+  stopOnCollide: 0
   CollidableLayerMask:
     serializedVersion: 2
-    m_Bits: 768
---- !u!114 &4309864185419153177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4309864185419153174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c486db2dc49afd142a7e204b19471175, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+    m_Bits: 0
+  CircleRadius: 0
+  CircleDiameter: 0

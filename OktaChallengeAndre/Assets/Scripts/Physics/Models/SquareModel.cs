@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class SquareModel : BasicPhysicsObject
@@ -13,6 +14,8 @@ public class SquareModel : BasicPhysicsObject
 
     private void Update()
     {
+        base.Movement();
+
         size = new Vector2(transform.localScale.x, transform.localScale.y);
 
         /*Pegando as bordas deste quadrado*/
@@ -20,6 +23,30 @@ public class SquareModel : BasicPhysicsObject
         BottomEdge = transform.position.y - transform.localScale.y / 2; // Calculo da borda inferior deste objeto.
         LeftEdge = transform.position.x - transform.localScale.x / 2; // Calculo da borda esquerda deste objeto.
         RightEdge = transform.position.x + transform.localScale.x / 2; // Calculo da borda direita deste objeto.
+        
+        foreach (BasicPhysicsObject bpo in iCustomCollision.collidersInScene)
+        {
+            //Otimizar
+            if (bpo.gameObject.GetInstanceID() != this.gameObject.GetInstanceID())
+            {
+                if (bpo is CircleModel)
+                {
+                    iCustomCollision.CollisionBetweenCircleAndSquare((CircleModel)bpo, this);
+                }
+                else if (bpo is SquareModel)
+                {
+                    iCustomCollision.CollisionBetweenSquareAndSquare(this, (SquareModel)bpo);
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError($"Colisor do tipo {bpo.GetType()} : {bpo.gameObject.name}");
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 
     void OnDrawGizmos()

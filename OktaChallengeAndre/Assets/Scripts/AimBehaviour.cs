@@ -1,9 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class AimBehaviour : MonoBehaviour
 {
+    /*[Inject]
+    ICustomCollision iCustomCollision;*/
+
+    [Inject]
+    private BasicPhysicsObject.Factory bulletFactory;
+
     public float AimRotateSpeed = 2;
 
     private float HorizontalAxisInput;
@@ -11,8 +18,6 @@ public class AimBehaviour : MonoBehaviour
     //public Vector2 directionSpeed;
 
     public float BulletSpeed;
-
-    public GameObject bulletPrefab;
 
     void Start()
     {
@@ -25,7 +30,8 @@ public class AimBehaviour : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject bullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity);
+            BasicPhysicsObject bullet = bulletFactory.Create(); //Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity);
+            bullet.transform.position = gameObject.transform.position;
             bullet.transform.rotation = gameObject.transform.rotation;
             bullet.GetComponent<BasicPhysicsObject>().Velocity = -transform.right * BulletSpeed;
         }
@@ -40,6 +46,6 @@ public class AimBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
- 
+
     }
 }

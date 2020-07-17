@@ -8,8 +8,20 @@ public class VerticalMovement : MonoBehaviour
 
     private float VerticalAxisInput;
 
+    public BasicPhysicsObject bpo;
+
     void Start()
     {
+        try
+        {
+            bpo = GetComponent<BasicPhysicsObject>();
+            bpo.Velocity = new Vector3(0, MovementSpeed, 0);
+        }
+        catch
+        {
+            Debug.LogError("BasicPhysicsObject não encontrado. Por favor, adicionar CircleModel ou SquareModel");
+            DestroyImmediate(this);
+        }
     }
 
     // Update is called once per frame
@@ -20,6 +32,7 @@ public class VerticalMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.Translate(Vector3.up * VerticalAxisInput * MovementSpeed * Time.deltaTime, Space.World);
+        bpo.Velocity = new Vector3(0, VerticalAxisInput * MovementSpeed,0);
+        //transform.Translate(Vector3.up * VerticalAxisInput * MovementSpeed * Time.deltaTime, Space.World);
     }
 }
