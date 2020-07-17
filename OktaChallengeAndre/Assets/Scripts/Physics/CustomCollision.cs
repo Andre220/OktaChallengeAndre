@@ -13,22 +13,25 @@ using UnityEngine;
 /// logica simples de colisao, calculando a posição das bordas do quadrado e 
 /// comparando com a posição da borda de outros quadrados
 /// 
-/// 
-/// 
 /// </summary>
 
 public class CustomCollision : MonoBehaviour
 {
-    public BasicPhysicsObject[] sceneCollidables;
+    public List<BasicPhysicsObject> sceneCollidables;
 
     public LayerMask CollidableLayerMask;
 
     public event Action<BasicPhysicsObject> OnCustomCollision;
 
-    // Start is called before the first frame update
     void Start()
     {
-        sceneCollidables = FindObjectsOfType<BasicPhysicsObject>();
+        foreach (BasicPhysicsObject b in FindObjectsOfType<BasicPhysicsObject>())
+        {
+            if (b.gameObject.GetInstanceID() != this.gameObject.GetInstanceID())
+            {
+                sceneCollidables.Add(b);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -36,17 +39,11 @@ public class CustomCollision : MonoBehaviour
     {
         foreach (BasicPhysicsObject b in sceneCollidables)
         {
-            if (b.gameObject.GetInstanceID() == this.gameObject.GetInstanceID())
+            if (Vector2.Distance(b.transform.position, gameObject.transform.position) < 2)
             {
-                return;
-            }
-            else
-            {
-                //if(b.gameObject.layer == CollidableLayerMask.value)
                 CollisionCalculation(b);
             }
         }
-
         print(CollidableLayerMask);
     }
 
@@ -190,8 +187,8 @@ public class CustomCollision : MonoBehaviour
 
         Vector2 velocityComponentPerpendicularToTangent = relativeVelocity - velocityComponentOnTangent;
 
-        thisObject.Velocity.x -= 2 * velocityComponentPerpendicularToTangent.x;
-        thisObject.Velocity.y -= 2 * velocityComponentPerpendicularToTangent.y;
+        thisObject.Velocity.x -= Mathf.Clamp(2 * velocityComponentPerpendicularToTangent.x, -2,2); // fazendo os valores de velocidade terem um maximo. Acima desses valores maximos a chance deles atravessarem outros objetos e grande
+        thisObject.Velocity.y -= Mathf.Clamp(2 * velocityComponentPerpendicularToTangent.y, -2,2);
 
         //other.Velocity.x -= velocityComponentPerpendicularToTangent.x;
         //other.Velocity.y -= velocityComponentPerpendicularToTangent.y;
