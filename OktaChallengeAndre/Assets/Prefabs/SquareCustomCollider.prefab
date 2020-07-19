@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3945d6323a120824a881f689f2156a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliderType: 1
   Velocity: {x: 0, y: 0, z: 0}
   isStatic: 0
   bounce: 0
+  stopOnCollide: 0
   CollidableLayerMask:
     serializedVersion: 2
     m_Bits: 0

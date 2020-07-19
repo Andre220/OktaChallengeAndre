@@ -12,8 +12,9 @@ public class SquareModel : BasicPhysicsObject
     public float LeftEdge;
     public float RightEdge;
 
-    private void Update()
+    void Update()
     {
+        //base.FixedUpdate();
         base.Movement();
 
         size = new Vector2(transform.localScale.x, transform.localScale.y);

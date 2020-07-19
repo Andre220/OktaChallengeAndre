@@ -6,22 +6,15 @@ using UnityEngine;
 public interface ICustomCollision
 {
     List<BasicPhysicsObject> collidersInScene { get; }
+    
+    event Action<BasicPhysicsObject> OnCollisionEvent;
 
-    event Action OnCollisionHappened;
-
-    void OnCollision(BasicPhysicsObject callerCollider, CollisionType collisionType);
+    //void OnCollision(BasicPhysicsObject callerCollider);
 
     void AddColliderToBuffer(BasicPhysicsObject bpo);
-    void RemoveColliderToBuffer(BasicPhysicsObject bpo);
+    void RemoveColliderFromBuffer(BasicPhysicsObject bpo);
 
     void CollisionBetweenCircleAndSquare(CircleModel circle, SquareModel square);
     void CollisionBetweenCircleAndCircle(CircleModel circleA, CircleModel circleB);
     void CollisionBetweenSquareAndSquare(SquareModel squareA, SquareModel squareB);
-}
-
-public enum CollisionType 
-{
-    CircleAndSquare,
-    CircleAndCircle,
-    SquareAndSquare
 }

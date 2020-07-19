@@ -8,6 +8,7 @@ public class CircleModel : BasicPhysicsObject
 
     void Update()
     {
+        //base.FixedUpdate();
         base.Movement();
 
         CircleDiameter = gameObject.transform.localScale.x;
@@ -22,7 +23,7 @@ public class CircleModel : BasicPhysicsObject
                 {
                     iCustomCollision.CollisionBetweenCircleAndCircle(this, (CircleModel)bpo);
                 }
-                else if(bpo is SquareModel)
+                else if (bpo is SquareModel)
                 {
                     iCustomCollision.CollisionBetweenCircleAndSquare(this, (SquareModel)bpo);
                 }
@@ -31,7 +32,7 @@ public class CircleModel : BasicPhysicsObject
                     UnityEngine.Debug.LogError("Colisor testado não corresponde ao CircleModel nem ao SquareModel");
                 }
             }
-            else 
+            else
             {
                 return;
             }

@@ -1,13 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
 using UnityEngine.Timeline;
 using Zenject;
+public enum ColliderType { Circle, Square}
 
 [HideInInspector]
 public class BasicPhysicsObject : MonoBehaviour
 {
+    public ColliderType colliderType;
+
     public Vector3 Velocity;
 
     public bool isStatic;
@@ -15,6 +19,8 @@ public class BasicPhysicsObject : MonoBehaviour
     public bool stopOnCollide;
 
     public LayerMask CollidableLayerMask;
+
+    public event Action<GameObject> OnCollision;
 
     [Inject]
     public ICustomCollision iCustomCollision; //CollisionService
@@ -25,30 +31,26 @@ public class BasicPhysicsObject : MonoBehaviour
         this.iCustomCollision = _iCustomCollision;
     }
 
-
-    //public void Init(ICustomCollision _collisionService)
-    //{
-    //    iCustomCollision = _collisionService;
-    //}
-
     void OnEnable()
     {
         iCustomCollision.AddColliderToBuffer(this);
-        //print(this.gameObject.name);
+        iCustomCollision.OnCollisionEvent += OnCustomCollision;
     }
 
     void OnDisable()
     {
-        iCustomCollision.RemoveColliderToBuffer(this);
+        iCustomCollision.RemoveColliderFromBuffer(this);
+        iCustomCollision.OnCollisionEvent -= OnCustomCollision;
     }
 
     void OnDestroy()
     {
-        iCustomCollision.RemoveColliderToBuffer(this);
+        iCustomCollision.RemoveColliderFromBuffer(this);
     }
 
-    void Update()
+    public virtual void FixedUpdate()
     {
+        //iCustomCollision.OnCollision(this); // Chamando o método principal da classe CustomCollision, para que os testes de colisão sejam feitos no Update.
     }
 
     public void Movement()
@@ -56,7 +58,12 @@ public class BasicPhysicsObject : MonoBehaviour
         gameObject.transform.position += Velocity * Time.deltaTime;
     }
 
-    private void Reset()
+    public void OnCustomCollision(BasicPhysicsObject collision)
+    {
+        OnCollision?.Invoke(collision.gameObject);
+    }
+
+    private void Reset() // Chamado quando chamamos o reset Component no Inspector e/ou quando adicionamos o componente no GameObject
     {
         if (this.GetType() == typeof(BasicPhysicsObject))
         {

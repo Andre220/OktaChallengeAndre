@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2fea45636a1d744f9479330cc8b600d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliderType: 0
   Velocity: {x: 0, y: 0, z: 0}
   isStatic: 0
   bounce: 1
