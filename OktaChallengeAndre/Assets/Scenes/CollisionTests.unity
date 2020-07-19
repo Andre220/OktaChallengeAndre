@@ -307,8 +307,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -365,10 +365,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &140607448 stripped
 Transform:
@@ -607,8 +604,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -665,10 +662,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &181793936 stripped
 Transform:
@@ -773,8 +767,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -831,10 +825,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &202836883 stripped
 Transform:
@@ -945,7 +936,7 @@ GameObject:
   - component: {fileID: 261137216}
   - component: {fileID: 261137212}
   - component: {fileID: 261137215}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1065,7 +1056,7 @@ MonoBehaviour:
   stopOnCollide: 1
   CollidableLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   CircleRadius: 0
   CircleDiameter: 0
 --- !u!114 &261137217
@@ -1096,8 +1087,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -1154,10 +1145,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &264817019 stripped
 Transform:
@@ -1179,8 +1167,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -1237,10 +1225,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &306605055 stripped
 Transform:
@@ -1335,7 +1320,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 363055044}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FirePosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1511,8 +1496,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -1569,10 +1554,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &489286315 stripped
 Transform:
@@ -2174,8 +2156,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -2232,10 +2214,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &753677592 stripped
 Transform:
@@ -2821,8 +2800,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -2879,10 +2858,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &1007133058 stripped
 Transform:
@@ -3193,8 +3169,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -3251,10 +3227,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &1155491275 stripped
 Transform:
@@ -3311,8 +3284,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -3369,10 +3342,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &1188432319 stripped
 Transform:
@@ -3390,7 +3360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1207268015}
   - component: {fileID: 1207268016}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3919,7 +3889,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1358784595}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FirePosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4154,8 +4124,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -4212,10 +4182,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &1411266097 stripped
 Transform:
@@ -4675,8 +4642,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -4733,10 +4700,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &1582757668 stripped
 Transform:
@@ -5001,7 +4965,7 @@ GameObject:
   - component: {fileID: 1653069021}
   - component: {fileID: 1653069023}
   - component: {fileID: 1653069026}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5158,8 +5122,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -5216,10 +5180,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &1703633702 stripped
 Transform:
@@ -5486,7 +5447,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1752692931}
   - component: {fileID: 1752692932}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5638,8 +5599,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -5696,10 +5657,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!1001 &1800725160
 PrefabInstance:
@@ -5881,8 +5839,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -5939,10 +5897,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &1853538660 stripped
 Transform:
@@ -6296,8 +6251,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281909, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
-      propertyPath: colliderType
-      value: 1
+      propertyPath: CollidableLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094120358038281910, guid: ef4e8281f34e22e4caba05d088e20c06,
         type: 3}
@@ -6354,10 +6309,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1035076319395426584, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 1532523514, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}
 --- !u!4 &2021845354 stripped
 Transform:

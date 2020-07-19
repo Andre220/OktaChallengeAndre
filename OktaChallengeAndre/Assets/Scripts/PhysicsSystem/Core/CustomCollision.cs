@@ -69,7 +69,7 @@ public class CustomCollision : ICustomCollision
     {
         float minDistanceTest = circle.transform.position.x + circle.CircleDiameter - square.transform.position.x + square.size.x;
 
-        if (Vector2.Distance(circle.transform.position, square.transform.position) < 2)
+        if (Vector2.Distance(circle.transform.position, square.transform.position) < 1)
         {
             //print("Chamou CircleToSquare");
             float x = circle.transform.position.x; //cordenada X deste circulo
@@ -110,9 +110,11 @@ public class CustomCollision : ICustomCollision
                 //OnSquareCollision?.Invoke();
 
                 //OnCollisionHappened?.Invoke();
+
+                MonoBehaviour.print($"{circle.name} | {square.name}");
             }
 
-            //OnCollisionEvent?.Invoke(square);
+            OnCollisionEvent?.Invoke(square);
         }
         else
         {
@@ -124,7 +126,7 @@ public class CustomCollision : ICustomCollision
     {
         float minDistanceTest = circle.transform.position.x + circle.CircleDiameter - square.transform.position.x + square.size.x;
 
-        if (Vector2.Distance(circle.transform.position, square.transform.position) < 2)
+        if (Vector2.Distance(circle.transform.position, square.transform.position) < 1)
         {
             //print("Chamou CircleToSquare");
             float x = circle.transform.position.x; //cordenada X deste circulo
@@ -177,67 +179,60 @@ public class CustomCollision : ICustomCollision
 
     public void CollisionBetweenCircleAndCircle(CircleModel circleA, CircleModel circleB)
     {
-        try 
+        float minDistanceTest = circleA.transform.position.x + circleA.CircleDiameter - circleB.transform.position.x + circleB.CircleDiameter;
+
+        float distanceBetweenCircles = Vector2.Distance(circleA.transform.position, circleB.gameObject.transform.position);
+
+        if (distanceBetweenCircles < 1)
         {
-            float minDistanceTest = circleA.transform.position.x + circleA.CircleDiameter - circleB.transform.position.x + circleB.CircleDiameter;
 
-            float distanceBetweenCircles = Vector2.Distance(circleA.transform.position, circleB.gameObject.transform.position);
-
-            if (distanceBetweenCircles < 2)
+            if (distanceBetweenCircles < circleA.transform.localScale.x / 2 + circleB.gameObject.transform.localScale.x / 2)
             {
+                //Colisao ocorreu
 
-                if (distanceBetweenCircles < circleA.transform.localScale.x / 2 + circleB.gameObject.transform.localScale.x / 2)
+                float angle = Mathf.Atan2(circleA.transform.position.x - circleB.gameObject.transform.position.x, circleA.transform.position.y - circleB.gameObject.transform.position.y);
+
+                float distanceToMove = (circleA.CircleRadius + circleB.CircleRadius) - distanceBetweenCircles;
+
+                Vector3 movement = new Vector3(angle * distanceBetweenCircles * Time.deltaTime //* thisCircle.Velocity.x
+                    , angle * distanceBetweenCircles * Time.deltaTime //* thisCircle.Velocity.y
+                    , 0);
+
+                if (circleB.isStatic)
                 {
-                    //Colisao ocorreu
-
-                    float angle = Mathf.Atan2(circleA.transform.position.x - circleB.gameObject.transform.position.x, circleA.transform.position.y - circleB.gameObject.transform.position.y);
-
-                    float distanceToMove = (circleA.CircleRadius + circleB.CircleRadius) - distanceBetweenCircles;
-
-                    Vector3 movement = new Vector3(angle * distanceBetweenCircles * Time.deltaTime //* thisCircle.Velocity.x
-                       , angle * distanceBetweenCircles * Time.deltaTime //* thisCircle.Velocity.y
-                       , 0);
-
-                    if (circleB.isStatic)
+                    //print("is static");
+                    //thisCircle.Velocity = new Vector2(-thisCircle.Velocity.x, -thisCircle.Velocity.y);
+                }
+                else if (circleB.bounce)
+                {
+                    //print("bounce");
+                    BounceCollision(circleA, circleB);
+                }
+                else if (circleB.stopOnCollide || circleA.stopOnCollide)
+                {
+                    if (circleA.stopOnCollide)
                     {
-                        //print("is static");
-                        //thisCircle.Velocity = new Vector2(-thisCircle.Velocity.x, -thisCircle.Velocity.y);
+                        StopOnCollide(circleA, circleB);
                     }
-                    else if (circleB.bounce)
+                    else
                     {
-                        //print("bounce");
-                        BounceCollision(circleA, circleB);
+                        StopOnCollide(circleB, circleA);
                     }
-                    else if (circleB.stopOnCollide || circleA.stopOnCollide)
-                    {
-                        if (circleA.stopOnCollide)
-                        {
-                            StopOnCollide(circleA, circleB);
-                        }
-                        else
-                        {
-                            StopOnCollide(circleB, circleA);
-                        }
-                        //print("not bounce and not static");
-                        //other.gameObject.transform.position -= movement;
-                    }
-
-                    //c1.gameObject.transform.position += movement;
-                    //UnityEngine.MonoBehaviour.print($"Circle {circleA.gameObject.name} and Circle {circleB.gameObject.name} Collided");
-                    //OnCircleCollision?.Invoke();
-
+                    //print("not bounce and not static");
+                    //other.gameObject.transform.position -= movement;
                 }
 
-                //OnCollisionEvent?.Invoke(circleB);
+                //c1.gameObject.transform.position += movement;
+                //UnityEngine.MonoBehaviour.print($"Circle {circleA.gameObject.name} and Circle {circleB.gameObject.name} Collided");
+                //OnCircleCollision?.Invoke();
+
             }
-            else
-            {
-                return;
-            }
+
+            OnCollisionEvent?.Invoke(circleB);
         }
-        catch 
+        else
         {
-            Debug.Log($"{circleA.gameObject.name} + {circleB.gameObject.name}");
+            return;
         }
     }
 
@@ -245,7 +240,7 @@ public class CustomCollision : ICustomCollision
     {
         float minDistanceTest = squareA.transform.position.x + squareA.size.x - squareB.transform.position.x + squareB.size.x;
 
-        if (Vector2.Distance(squareA.transform.position, squareB.transform.position) < 2)
+        if (Vector2.Distance(squareA.transform.position, squareB.transform.position) < 1)
         {
             if ((squareA.LeftEdge < squareB.RightEdge && squareB.RightEdge < squareA.RightEdge) &&
             (squareA.TopEdge > squareB.BottomEdge && squareB.BottomEdge > squareA.BottomEdge ||

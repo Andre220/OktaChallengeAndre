@@ -19,17 +19,20 @@ public class CircleModel : BasicPhysicsObject
             //Otimizar
             if (bpo.gameObject.GetInstanceID() != this.gameObject.GetInstanceID())
             {
-                if (bpo is CircleModel)
+                if (((1 << bpo.gameObject.layer) & CollidableLayerMask) != 0) //PROBLEMA AQUI. ENTENDER COMO FAZER O CALCULO DE BITS DA LAYER MASK
                 {
-                    iCustomCollision.CollisionBetweenCircleAndCircle(this, (CircleModel)bpo);
-                }
-                else if (bpo is SquareModel)
-                {
-                    iCustomCollision.CollisionBetweenCircleAndSquare(this, (SquareModel)bpo);
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("Colisor testado não corresponde ao CircleModel nem ao SquareModel");
+                    if (bpo is CircleModel)
+                    {
+                        iCustomCollision.CollisionBetweenCircleAndCircle(this, (CircleModel)bpo);
+                    }
+                    else if (bpo is SquareModel)
+                    {
+                        iCustomCollision.CollisionBetweenCircleAndSquare(this, (SquareModel)bpo);
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.LogError("Colisor testado não corresponde ao CircleModel nem ao SquareModel");
+                    }
                 }
             }
             else

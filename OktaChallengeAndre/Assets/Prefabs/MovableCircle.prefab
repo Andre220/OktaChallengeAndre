@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4309864185419153179}
   - component: {fileID: 4309864185419153176}
   - component: {fileID: 4309864185419153181}
-  m_Layer: 0
+  - component: {fileID: 4194071244074030558}
+  m_Layer: 11
   m_Name: MovableCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,3 +105,15 @@ MonoBehaviour:
     m_Bits: 0
   CircleRadius: 0
   CircleDiameter: 0
+--- !u!114 &4194071244074030558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4309864185419153174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb40440ade3a325448ba0c9c0d6daabe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

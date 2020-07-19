@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3094120358038281910}
   - component: {fileID: 3094120358038281909}
   - component: {fileID: 723998346}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SquareCustomCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ MonoBehaviour:
   stopOnCollide: 0
   CollidableLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 3072
   size: {x: 0, y: 0}
   TopEdge: 0
   BottomEdge: 0

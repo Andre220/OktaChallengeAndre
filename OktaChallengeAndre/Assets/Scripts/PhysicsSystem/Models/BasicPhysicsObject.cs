@@ -37,15 +37,10 @@ public class BasicPhysicsObject : MonoBehaviour
         iCustomCollision.OnCollisionEvent += OnCustomCollision;
     }
 
-    void OnDisable()
-    {
-        iCustomCollision.RemoveColliderFromBuffer(this);
-        iCustomCollision.OnCollisionEvent -= OnCustomCollision;
-    }
-
     void OnDestroy()
     {
         iCustomCollision.RemoveColliderFromBuffer(this);
+        iCustomCollision.OnCollisionEvent -= OnCustomCollision;
     }
 
     public virtual void FixedUpdate()

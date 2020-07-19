@@ -30,17 +30,21 @@ public class SquareModel : BasicPhysicsObject
             //Otimizar
             if (bpo.gameObject.GetInstanceID() != this.gameObject.GetInstanceID())
             {
-                if (bpo is CircleModel)
+
+                if (((1 << bpo.gameObject.layer) & CollidableLayerMask) != 0)
                 {
-                    iCustomCollision.CollisionBetweenCircleAndSquare((CircleModel)bpo, this);
-                }
-                else if (bpo is SquareModel)
-                {
-                    iCustomCollision.CollisionBetweenSquareAndSquare(this, (SquareModel)bpo);
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError($"Colisor do tipo {bpo.GetType()} : {bpo.gameObject.name}");
+                    if (bpo is CircleModel)
+                    {
+                        iCustomCollision.CollisionBetweenCircleAndSquare((CircleModel)bpo, this);
+                    }
+                    else if (bpo is SquareModel)
+                    {
+                        iCustomCollision.CollisionBetweenSquareAndSquare(this, (SquareModel)bpo);
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.LogError($"Colisor do tipo {bpo.GetType()} : {bpo.gameObject.name}");
+                    }
                 }
             }
             else
