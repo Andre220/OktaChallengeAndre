@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AimBehaviour))]
 [RequireComponent(typeof(VerticalMovement))]
+[RequireComponent(typeof(AimBehaviour))]
 public class Player : MonoBehaviour
 {
     public AimBehaviour PlayerAim;
@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        PlayerAim = gameObject.GetComponent<AimBehaviour>();
-        PlayerMovement = gameObject.GetComponent<VerticalMovement>();
+        PlayerAim = this.gameObject.GetComponent<AimBehaviour>();
+        PlayerMovement = this.gameObject.GetComponent<VerticalMovement>();
     }
 
     public void MyTurn(bool myTurn)

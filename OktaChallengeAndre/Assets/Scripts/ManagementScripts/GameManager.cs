@@ -6,10 +6,13 @@ using Zenject.SpaceFighter;
 //Mudar o estado via Evento.
 public class GameManager : MonoBehaviour
 {
+    public int currentPlayerIndex;
     public List<Player> Players;
 
     void Start()
     {
+        currentPlayerIndex = 0;
+
         foreach (Player p in Players)
         {
             if (p == null)
@@ -18,9 +21,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                p.PlayerAim.ShootEvent += TurnHandle;
-
-                if (Players.IndexOf(p) != 0)
+                if (Players.IndexOf(p) != currentPlayerIndex)
                 {
                     p.MyTurn(false);
                 }
@@ -28,9 +29,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void TurnHandle(Player p)
+    public void EnableNextPlayer()
     {
-        int nextPlayerIndex = Players.IndexOf(p) + 1 >= Players.Count ? 0 : Players.IndexOf(p) + 1;
+        int nextPlayerIndex = currentPlayerIndex + 1 >= Players.Count ? 0 : currentPlayerIndex + 1;
 
         for (int i = 0; i < Players.Count; i++)
         {
@@ -43,5 +44,12 @@ public class GameManager : MonoBehaviour
                 Players[i].MyTurn(false);
             }
         }
+
+        currentPlayerIndex = nextPlayerIndex;
+    }
+
+    public void DisableCurrentPlayerInput() // Usado quando um player acabou de fazer um disparo e a bala ainda nao terminou seu percurso.
+    {
+        Players[currentPlayerIndex].MyTurn(false);
     }
 }

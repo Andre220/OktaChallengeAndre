@@ -1,50 +1,40 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CircleModel : BasicPhysicsObject
 {
-    public float CircleRadius;
-    public float CircleDiameter;
+    public float CircleRadius, CircleDiameter;
 
     void Update()
     {
-        //base.FixedUpdate();
-        base.Movement();
+        base.MoveGameObject();
 
         CircleDiameter = gameObject.transform.localScale.x;
         CircleRadius = gameObject.transform.localScale.x / 2;
 
-        foreach (BasicPhysicsObject bpo in iCustomCollision.collidersInScene)
+        foreach (BasicPhysicsObject Other in CollidersInLayerMask)
         {
-            //Otimizar
-            if (bpo.gameObject.GetInstanceID() != this.gameObject.GetInstanceID())
+            if(this.PhysicsProperties != null && !this.PhysicsProperties.isStatic && Other != null)
             {
-                if (((1 << bpo.gameObject.layer) & CollidableLayerMask) != 0) //PROBLEMA AQUI. ENTENDER COMO FAZER O CALCULO DE BITS DA LAYER MASK
+                //print($"{gameObject.name} can collide with {bpo.gameObject.name}");
+                if (Other is CircleModel)
                 {
-                    if (bpo is CircleModel)
-                    {
-                        iCustomCollision.CollisionBetweenCircleAndCircle(this, (CircleModel)bpo);
-                    }
-                    else if (bpo is SquareModel)
-                    {
-                        iCustomCollision.CollisionBetweenCircleAndSquare(this, (SquareModel)bpo);
-                    }
-                    else
-                    {
-                        UnityEngine.Debug.LogError("Colisor testado não corresponde ao CircleModel nem ao SquareModel");
-                    }
+                    iCustomCollision.CollisionBetweenCircleAndCircle(this, (CircleModel)Other);
                 }
-            }
-            else
-            {
-                return;
+                else if (Other is SquareModel)
+                {
+                    iCustomCollision.CollisionBetweenCircleAndSquare(this, (SquareModel)Other);
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError($"Colisor do tipo {Other.GetType()} : {Other.gameObject.name}");
+                }
             }
         }
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(gameObject.transform.position, CircleRadius);
     }
 }

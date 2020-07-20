@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SquareModel : BasicPhysicsObject
 {
@@ -14,9 +11,6 @@ public class SquareModel : BasicPhysicsObject
 
     void Update()
     {
-        //base.FixedUpdate();
-        base.Movement();
-
         size = new Vector2(transform.localScale.x, transform.localScale.y);
 
         /*Pegando as bordas deste quadrado*/
@@ -25,38 +19,29 @@ public class SquareModel : BasicPhysicsObject
         LeftEdge = transform.position.x - transform.localScale.x / 2; // Calculo da borda esquerda deste objeto.
         RightEdge = transform.position.x + transform.localScale.x / 2; // Calculo da borda direita deste objeto.
         
-        foreach (BasicPhysicsObject bpo in iCustomCollision.collidersInScene)
+        foreach (BasicPhysicsObject Other in iCustomCollision.collidersInScene)
         {
-            //Otimizar
-            if (bpo.gameObject.GetInstanceID() != this.gameObject.GetInstanceID())
+            if (this.PhysicsProperties != null && !this.PhysicsProperties.isStatic && Other != null)
             {
-
-                if (((1 << bpo.gameObject.layer) & CollidableLayerMask) != 0)
+                if (Other is CircleModel)
                 {
-                    if (bpo is CircleModel)
-                    {
-                        iCustomCollision.CollisionBetweenCircleAndSquare((CircleModel)bpo, this);
-                    }
-                    else if (bpo is SquareModel)
-                    {
-                        iCustomCollision.CollisionBetweenSquareAndSquare(this, (SquareModel)bpo);
-                    }
-                    else
-                    {
-                        UnityEngine.Debug.LogError($"Colisor do tipo {bpo.GetType()} : {bpo.gameObject.name}");
-                    }
+                    iCustomCollision.CollisionBetweenSquareAndCircle(this, (CircleModel)Other);
                 }
-            }
-            else
-            {
-                return;
+                else if (Other is SquareModel)
+                {
+                    iCustomCollision.CollisionBetweenSquareAndSquare(this, (SquareModel)Other);
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError($"Colisor do tipo {Other.GetType()} : {Other.gameObject.name}");
+                }
             }
         }
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.green;
         Gizmos.DrawWireCube(gameObject.transform.position, new Vector3(size.x, size.y, 1));
     }
 }

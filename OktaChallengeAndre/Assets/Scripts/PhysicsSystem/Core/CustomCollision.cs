@@ -19,7 +19,6 @@ public class CustomCollision : ICustomCollision
 
     public void AddColliderToBuffer(BasicPhysicsObject bpo)
     {
-        //UnityEngine.MonoBehaviour.print(bpo.gameObject.name);
         collidersInScene.Add(bpo);
     }
 
@@ -29,72 +28,41 @@ public class CustomCollision : ICustomCollision
     }
     #endregion
 
-    public void OnCollision(BasicPhysicsObject callerCollider)
-    {
-        //TO DO - pegar apenas os colisores que estão na mesma layer do BasicPhysicsObject
-        //Esta lógica esta sendo feita pelo circleCollider ou Square Collider. Ideal fazer aqui
-
-        //foreach (BasicPhysicsObject currentCollider in collidersInScene)
-        //{
-
-
-        //    if (callerCollider != currentCollider)
-        //    {
-        //        if (callerCollider.colliderType == ColliderType.Circle && currentCollider.colliderType == ColliderType.Circle)
-        //        {
-        //            CollisionBetweenCircleAndCircle(callerCollider.gameObject.GetComponent<CircleModel>(), currentCollider.gameObject.GetComponent<CircleModel>()); ;
-        //        }
-        //        else if (callerCollider.colliderType == ColliderType.Circle && currentCollider.colliderType == ColliderType.Square)
-        //        {
-        //            CollisionBetweenCircleAndSquare(callerCollider.gameObject.GetComponent<CircleModel>(), currentCollider.gameObject.GetComponent<SquareModel>());
-        //        }
-        //        else if (callerCollider.colliderType == ColliderType.Square && currentCollider.colliderType == ColliderType.Circle)
-        //        {
-        //            CollisionBetweenSquareAndCircle(callerCollider.gameObject.GetComponent<SquareModel>(), currentCollider.gameObject.GetComponent<CircleModel>());
-        //        }
-        //        else if (callerCollider.colliderType == ColliderType.Square && currentCollider.colliderType == ColliderType.Square)
-        //        {
-        //            CollisionBetweenSquareAndSquare(callerCollider.gameObject.GetComponent<SquareModel>(), currentCollider.gameObject.GetComponent<SquareModel>());
-        //        }
-        //        else
-        //        {
-        //            Debug.LogError($"CustomCollision L55: Game Objects com colisor {callerCollider.colliderType.ToString()} e {currentCollider.colliderType.ToString()} não possuem implementação para testar colisão entre eles. ");
-        //        }
-        //    }
-        //}
-    }
-
     #region Calculando colisao com base no formato dos objetos
     public void CollisionBetweenCircleAndSquare(CircleModel circle, SquareModel square)
     {
-        float minDistanceTest = circle.transform.position.x + circle.CircleDiameter - square.transform.position.x + square.size.x;
-
-        if (Vector2.Distance(circle.transform.position, square.transform.position) < 1)
+        if (circle == null || square == null)
         {
-            //print("Chamou CircleToSquare");
-            float x = circle.transform.position.x; //cordenada X deste circulo
-            float y = circle.transform.position.y; //cordenada Y deste circulo       
+            return;
+        }
 
+        float Cx = circle.transform.position.x;
+        float Cy = circle.transform.position.y;
+        float Sx = square.transform.position.x;
+        float Sy = square.transform.position.y;
+
+        //float minDistanceTest = square.transform.position.x + square.size.x - circle.transform.position.x + circle.CircleDiameter; 
+
+        //float distanceBetweenObjects = (Cx - Sx * Cx - Sx) + (Cy - Sy * Cy - Sy);
+        float distanceBetweenObjects = Vector2.Distance(square.transform.position, circle.gameObject.transform.position);
+
+        if (distanceBetweenObjects < circle.CircleDiameter + square.size.x)
+        {
             /*Testando se as bordas do circulo (circulo + raio) estão sobreponto alguma das bordas do quadrilatero em questão*/
-            if (x + circle.CircleRadius > square.LeftEdge && x - circle.CircleRadius < square.RightEdge
-                && (y + circle.CircleRadius > square.BottomEdge && square.TopEdge > y - circle.CircleRadius ||
-                    y - circle.CircleRadius < square.TopEdge && square.BottomEdge < y + circle.CircleRadius))
+            if (Cx + circle.CircleRadius > square.LeftEdge && Cx - circle.CircleRadius < square.RightEdge
+                && (Cy + circle.CircleRadius > square.BottomEdge && square.TopEdge > Cy - circle.CircleRadius ||
+                    Cy - circle.CircleRadius < square.TopEdge && square.BottomEdge < Cy + circle.CircleRadius))
             {
-                //print($"Circulo {gameObject.name} colidiu com {gameObject.name}");
+                UnityEngine.MonoBehaviour.print($"Circulo {circle.name} colidiu com {square.name}");
 
-                //GameObject go = new GameObject();
-                //go.AddComponent<ObjectWithGizmo>();
-                //UnityEngine.MonoBehaviour.Instantiate(go, circle.transform.position, Quaternion.identity);
-
-                if (circle.bounce)
+                if (circle.PhysicsProperties.canBounce)
                 {
-                    //UnityEngine.MonoBehaviour.print("Bounce");
-                    BounceCollision(circle, square); //Not work properly
+                    BounceCollision(circle, square);
                 }
-                
-                if (circle.stopOnCollide || square.stopOnCollide)
+
+                if (circle.PhysicsProperties.stopOnCollide || square.PhysicsProperties.stopOnCollide)
                 {
-                    if (circle.stopOnCollide)
+                    if (circle.PhysicsProperties.stopOnCollide)
                     {
                         StopOnCollide(circle, square);
                     }
@@ -102,56 +70,46 @@ public class CustomCollision : ICustomCollision
                     {
                         StopOnCollide(square, circle);
                     }
-                    //print("not bounce and not static");
-                    //other.gameObject.transform.position -= movement;
                 }
-
-                //UnityEngine.MonoBehaviour.print($"Circle {circle.gameObject.name} and square {square.gameObject.name} Collided");
-                //OnSquareCollision?.Invoke();
-
-                //OnCollisionHappened?.Invoke();
-
-                MonoBehaviour.print($"{circle.name} | {square.name}");
+                OnCollisionEvent?.Invoke(square);
             }
-
-            OnCollisionEvent?.Invoke(square);
-        }
-        else
-        {
-            return;
+            else
+            {
+                return;
+            }
         }
     }
 
     public void CollisionBetweenSquareAndCircle(SquareModel square, CircleModel circle)
     {
-        float minDistanceTest = circle.transform.position.x + circle.CircleDiameter - square.transform.position.x + square.size.x;
-
-        if (Vector2.Distance(circle.transform.position, square.transform.position) < 1)
+        if (square == null || circle == null)
         {
-            //print("Chamou CircleToSquare");
-            float x = circle.transform.position.x; //cordenada X deste circulo
-            float y = circle.transform.position.y; //cordenada Y deste circulo       
+            return;
+        }
 
+        float Cx = circle.transform.position.x;
+        float Cy = circle.transform.position.y;
+        float Sx = square.transform.position.x;
+        float Sy = square.transform.position.y;
+
+        //float distanceBetweenObjects = (Cx - Sx * Cx - Sx) + (Cy - Sy * Cy - Sy);
+        float distanceBetweenObjects = Vector2.Distance(square.transform.position, circle.gameObject.transform.position);
+
+        if (distanceBetweenObjects < circle.CircleDiameter + square.size.x)
+        {
             /*Testando se as bordas do circulo (circulo + raio) estão sobreponto alguma das bordas do quadrilatero em questão*/
-            if (x + circle.CircleRadius > square.LeftEdge && x - circle.CircleRadius < square.RightEdge
-                && (y + circle.CircleRadius > square.BottomEdge && square.TopEdge > y - circle.CircleRadius ||
-                    y - circle.CircleRadius < square.TopEdge && square.BottomEdge < y + circle.CircleRadius))
+            if (Cx + circle.CircleRadius > square.LeftEdge && Cx - circle.CircleRadius < square.RightEdge
+                && (Cy + circle.CircleRadius > square.BottomEdge && square.TopEdge > Cy - circle.CircleRadius ||
+                    Cy - circle.CircleRadius < square.TopEdge && square.BottomEdge < Cy + circle.CircleRadius))
             {
-                //print($"Circulo {gameObject.name} colidiu com {gameObject.name}");
-
-                //GameObject go = new GameObject();
-                //go.AddComponent<ObjectWithGizmo>();
-                //UnityEngine.MonoBehaviour.Instantiate(go, circle.transform.position, Quaternion.identity);
-
-                if (circle.bounce)
+                if (circle.PhysicsProperties.canBounce)
                 {
-                    //UnityEngine.MonoBehaviour.print("Bounce");
                     BounceCollision(circle, square); //Not work properly
                 }
 
-                if (circle.stopOnCollide || square.stopOnCollide)
+                if (circle.PhysicsProperties.stopOnCollide || square.PhysicsProperties.stopOnCollide)
                 {
-                    if (circle.stopOnCollide)
+                    if (circle.PhysicsProperties.stopOnCollide)
                     {
                         StopOnCollide(circle, square);
                     }
@@ -159,102 +117,99 @@ public class CustomCollision : ICustomCollision
                     {
                         StopOnCollide(square, circle);
                     }
-                    //print("not bounce and not static");
-                    //other.gameObject.transform.position -= movement;
                 }
-
-                //UnityEngine.MonoBehaviour.print($"Circle {circle.gameObject.name} and square {square.gameObject.name} Collided");
-                //OnSquareCollision?.Invoke();
-
-                //OnCollisionHappened?.Invoke();
             }
-
-            //OnCollisionEvent?.Invoke(circle);
-        }
-        else
-        {
-            return;
+            else
+            {
+                return;
+            }
         }
     }
 
     public void CollisionBetweenCircleAndCircle(CircleModel circleA, CircleModel circleB)
     {
-        float minDistanceTest = circleA.transform.position.x + circleA.CircleDiameter - circleB.transform.position.x + circleB.CircleDiameter;
-
-        float distanceBetweenCircles = Vector2.Distance(circleA.transform.position, circleB.gameObject.transform.position);
-
-        if (distanceBetweenCircles < 1)
-        {
-
-            if (distanceBetweenCircles < circleA.transform.localScale.x / 2 + circleB.gameObject.transform.localScale.x / 2)
-            {
-                //Colisao ocorreu
-
-                float angle = Mathf.Atan2(circleA.transform.position.x - circleB.gameObject.transform.position.x, circleA.transform.position.y - circleB.gameObject.transform.position.y);
-
-                float distanceToMove = (circleA.CircleRadius + circleB.CircleRadius) - distanceBetweenCircles;
-
-                Vector3 movement = new Vector3(angle * distanceBetweenCircles * Time.deltaTime //* thisCircle.Velocity.x
-                    , angle * distanceBetweenCircles * Time.deltaTime //* thisCircle.Velocity.y
-                    , 0);
-
-                if (circleB.isStatic)
-                {
-                    //print("is static");
-                    //thisCircle.Velocity = new Vector2(-thisCircle.Velocity.x, -thisCircle.Velocity.y);
-                }
-                else if (circleB.bounce)
-                {
-                    //print("bounce");
-                    BounceCollision(circleA, circleB);
-                }
-                else if (circleB.stopOnCollide || circleA.stopOnCollide)
-                {
-                    if (circleA.stopOnCollide)
-                    {
-                        StopOnCollide(circleA, circleB);
-                    }
-                    else
-                    {
-                        StopOnCollide(circleB, circleA);
-                    }
-                    //print("not bounce and not static");
-                    //other.gameObject.transform.position -= movement;
-                }
-
-                //c1.gameObject.transform.position += movement;
-                //UnityEngine.MonoBehaviour.print($"Circle {circleA.gameObject.name} and Circle {circleB.gameObject.name} Collided");
-                //OnCircleCollision?.Invoke();
-
-            }
-
-            OnCollisionEvent?.Invoke(circleB);
-        }
-        else
+        if (circleA == null || circleB == null)
         {
             return;
         }
+
+        float Ax = circleA.transform.position.x;
+        float Ay = circleA.transform.position.y;
+        float Bx = circleB.transform.position.x;
+        float By = circleB.transform.position.y;
+
+        float distanceBetweenCircles = Vector2.Distance(circleA.transform.position, circleB.gameObject.transform.position);
+
+        //UnityEngine.Debug.Log($"d: {distanceBetweenCircles} | diam: {circleA.CircleRadius + circleB.CircleRadius}");
+
+        if(distanceBetweenCircles < circleA.CircleRadius + circleB.CircleRadius)
+        {
+            //Colisao ocorreu
+
+            float angle = Mathf.Atan2(circleA.transform.position.x - circleB.gameObject.transform.position.x, circleA.transform.position.y - circleB.gameObject.transform.position.y);
+
+            float distanceToMove = (circleA.CircleRadius + circleB.CircleRadius) - distanceBetweenCircles;
+
+            Vector3 movement = new Vector3(angle * distanceBetweenCircles * Time.deltaTime
+                , angle * distanceBetweenCircles * Time.deltaTime
+                , 0);
+
+            if (circleB.PhysicsProperties.isStatic)
+            {
+
+            }
+            else if (circleB.PhysicsProperties.canBounce)
+            {
+                BounceCollision(circleA, circleB);
+            }
+            else if (circleB.PhysicsProperties.stopOnCollide || circleA.PhysicsProperties.stopOnCollide)
+            {
+                if (circleA.PhysicsProperties.stopOnCollide)
+                {
+                    StopOnCollide(circleA, circleB);
+                }
+                else
+                {
+                    StopOnCollide(circleB, circleA);
+                }
+            }
+
+            OnCollisionEvent?.Invoke(circleB);
+        }  
     }
 
     public void CollisionBetweenSquareAndSquare(SquareModel squareA, SquareModel squareB)
     {
-        float minDistanceTest = squareA.transform.position.x + squareA.size.x - squareB.transform.position.x + squareB.size.x;
+        if (squareA == null || squareB == null)
+        {
+            return;
+        }
 
-        if (Vector2.Distance(squareA.transform.position, squareB.transform.position) < 1)
+        float Ax = squareA.transform.position.x;
+        float Ay = squareA.transform.position.y;
+        float Bx = squareB.transform.position.x;
+        float By = squareB.transform.position.y;
+
+        //float minDistanceTest = squareA.transform.position.x + squareA.size.x - squareB.transform.position.x + squareB.size.x;
+
+        //float distanceBetweenSquares = (Ax - Bx * Ax - Bx) + (Ay - By * Ay - By);
+        float distanceBetweenSquares = Vector2.Distance(squareA.transform.position, squareB.gameObject.transform.position);
+
+        if (distanceBetweenSquares < squareA.size.x / 2 + squareB.size.x /2)
         {
             if ((squareA.LeftEdge < squareB.RightEdge && squareB.RightEdge < squareA.RightEdge) &&
             (squareA.TopEdge > squareB.BottomEdge && squareB.BottomEdge > squareA.BottomEdge ||
-            squareA.BottomEdge < squareB.TopEdge && squareB.TopEdge < squareA.TopEdge))//Collision from left
+            squareA.BottomEdge < squareB.TopEdge && squareB.TopEdge < squareA.TopEdge))
             {
                 UnityEngine.MonoBehaviour.print($"Square {squareA.gameObject.name} and square {squareB.gameObject.name} Collided");
-                
-                if (squareA.bounce || squareB.bounce)
+
+                if (squareA.PhysicsProperties.canBounce || squareB.PhysicsProperties.canBounce)
                 {
                     BounceCollision(squareA, squareB);
                 }
-                else if (squareA.stopOnCollide || squareB.stopOnCollide)
+                else if (squareA.PhysicsProperties.stopOnCollide || squareB.PhysicsProperties.stopOnCollide)
                 {
-                    if (squareA.stopOnCollide)
+                    if (squareA.PhysicsProperties.stopOnCollide)
                     {
                         StopOnCollide(squareA, squareB);
                     }
@@ -262,27 +217,15 @@ public class CustomCollision : ICustomCollision
                     {
                         StopOnCollide(squareB, squareA);
                     }
-                    //print("not bounce and not static");
-                    //other.gameObject.transform.position -= movement;
                 }
-
-                //OnSquareCollision?.Invoke();
             }
             else if ((squareA.RightEdge > squareB.LeftEdge && squareB.LeftEdge > squareA.LeftEdge) &&
             (squareA.TopEdge > squareB.BottomEdge && squareB.BottomEdge > squareA.BottomEdge
-            || squareA.BottomEdge < squareB.TopEdge && squareB.TopEdge < squareA.TopEdge))//Collision from right
+            || squareA.BottomEdge < squareB.TopEdge && squareB.TopEdge < squareA.TopEdge))
             {
-                UnityEngine.MonoBehaviour.print($"Square {squareA.gameObject.name} and square {squareB.gameObject.name} Collided");
                 BounceCollision(squareA, squareB);
-                //OnSquareCollision?.Invoke();
             }
-            
-            //OnCollisionEvent?.Invoke(squareB);
         }
-        else
-        {
-            return;
-        }           
     }
     #endregion
 
@@ -304,33 +247,23 @@ public class CustomCollision : ICustomCollision
 
         Vector2 velocityComponentPerpendicularToTangent = relativeVelocity - velocityComponentOnTangent;
 
-        thisObject.Velocity.x -= Mathf.Clamp(2 * velocityComponentPerpendicularToTangent.x, -2, 2); // fazendo os valores de velocidade terem um maximo. Acima desses valores maximos a chance deles atravessarem outros objetos e grande
-        thisObject.Velocity.y -= Mathf.Clamp(2 * velocityComponentPerpendicularToTangent.y, -2, 2);
-
-        thisObject.Velocity.x -= velocityComponentPerpendicularToTangent.x; // fazendo os valores de velocidade terem um maximo. Acima desses valores maximos a chance deles atravessarem outros objetos e grande
-        thisObject.Velocity.y -= velocityComponentPerpendicularToTangent.y;
-
-
-        //other.Velocity.x -= velocityComponentPerpendicularToTangent.x;
-        //other.Velocity.y -= velocityComponentPerpendicularToTangent.y;
+        thisObject.Velocity.x -= 2 * velocityComponentPerpendicularToTangent.x;
+        thisObject.Velocity.y -= 2 * velocityComponentPerpendicularToTangent.y;
     }
 
     public void StopOnCollide(BasicPhysicsObject toStop, BasicPhysicsObject other) // Faz o objeto parar de se mover caso colida
     {
-        //TODO Ao colidir com as paredes, o player se afasta muito da parede
+        //TOFIX Ao colidir com as paredes, o player se afasta muito da parede
 
+        
         float distanceBetweenCircles = Vector2.Distance(toStop.transform.position, other.gameObject.transform.position);
 
         float angle = Mathf.Atan2(toStop.transform.position.x - other.gameObject.transform.position.x, toStop.transform.position.y - other.gameObject.transform.position.y);
 
-        float distanceToMove = (toStop.transform.localScale.x / 2 + other.transform.localScale.x / 2) - distanceBetweenCircles;
+        float distanceToMove = (toStop.transform.localScale.x + other.transform.localScale.x) - distanceBetweenCircles;
 
-        toStop.transform.position += new Vector3(0, Mathf.Cos(angle) * distanceBetweenCircles, 0);
+        toStop.transform.position += new Vector3(0, Mathf.Cos(angle) * distanceToMove / 4, 0); //divindo por 4 para reduzir a distancia a qual o objeto se afasta da parede ao colidir
+        
     }
     #endregion
-}
-
-public class CollisionInfo
-{
-    public GameObject collisionOther;
 }

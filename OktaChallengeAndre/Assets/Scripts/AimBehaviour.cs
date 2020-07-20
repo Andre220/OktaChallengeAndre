@@ -6,6 +6,8 @@ using Zenject;
 
 public class AimBehaviour : MonoBehaviour
 {
+    public GameEvent OnBulletShooted;
+
     public event Action<Player> ShootEvent;
 
     public Transform FirePosition;
@@ -13,42 +15,31 @@ public class AimBehaviour : MonoBehaviour
     [Inject]
     private BasicPhysicsObject.Factory bulletFactory;
 
-    public float AimRotateSpeed = 50;
 
-    private float HorizontalAxisInput;
+    public float AimRotateSpeed = 50;
 
     public float BulletSpeed = 7;
 
     void Update()
     {
-        HorizontalAxisInput = Input.GetAxisRaw("Horizontal");
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();
         }
 
-        transform.Rotate(Vector3.forward * HorizontalAxisInput * AimRotateSpeed * Time.deltaTime, Space.World);
-
-        /*Vector2 lookDirection = new Vector2(transform.localRotation.x, transform.localRotation.y);
-
-        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90;
-
-        directionSpeed = new Vector2(Mathf.Sin(Mathf.Deg2Rad * angle), Mathf.Cos(Mathf.Deg2Rad * angle));*/
+        transform.Rotate(Vector3.forward * Input.GetAxisRaw("Horizontal") * AimRotateSpeed * Time.deltaTime, Space.World);
     }
 
     public void Shoot()
     {
-        //print(gameObject.name);
-        ShootEvent?.Invoke(this.gameObject.GetComponent<Player>());
-        BasicPhysicsObject bullet = bulletFactory.Create(); //Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity);
+        OnBulletShooted.Raise();
+        BasicPhysicsObject bullet = bulletFactory.Create();
+
         bullet.transform.position = FirePosition.transform.position;
         bullet.transform.rotation = gameObject.transform.rotation;
+
+        bullet.GetComponent<Bullet>().Shooter = gameObject;
+        
         bullet.GetComponent<BasicPhysicsObject>().Velocity = FirePosition.transform.localScale.normalized.x * -transform.right * BulletSpeed;
-    }
-
-    public void OnShoot()
-    {
-
     }
 }

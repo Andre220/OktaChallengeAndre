@@ -7,29 +7,58 @@ using Zenject;
 [RequireComponent(typeof(BasicPhysicsObject))]
 public class Bullet : MonoBehaviour
 {
+    public GameObject Shooter; //Player que disparou
+
+    public GameEvent OnBulletDestroyed;
+
+    private int bounceCount;
+
+    public BulletInfo bulletInfo;
+
     [Inject]
     public ICustomCollision customCollision;
-
-    //public event Action OnBulletDestroyed;
 
     void OnEnable()
     {
         customCollision.OnCollisionEvent += OnCollision;
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
+        OnBulletDestroyed.Raise();
         customCollision.OnCollisionEvent -= OnCollision;
-        //customCollision.RemoveColliderFromBuffer(this);
-        //OnBulletDestroyed?.Invoke();
     }
 
     void OnCollision(BasicPhysicsObject bpo) //Forma atual de fazer um "callback" para colisões
     {
-        if ((gameObject.name == "Player1" && bpo.name == "Player2") || (gameObject.name == "Player2" && bpo.name == "Player1"))
+        if (bpo.gameObject != Shooter)
         {
-            Destroy(gameObject);
+            if (bpo.gameObject.name == "LeftPlayer")
+            {
+                Destroy(gameObject);
+            }
+            else if (bpo.gameObject.name == "RightPlayer")
+            {
+                Destroy(gameObject);
+            }
         }
-        //print(bpo.gameObject.name);
+    }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
+
+    //void DestroyGameObject()
+    //{
+    //    customCollision.OnCollisionEvent -= OnCollision;
+    //    OnBulletDestroyed.Raise();
+    //    Destroy(this.gameObject);
+    //}
+
+    IEnumerator DestroyWithDelay(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
     }
 }

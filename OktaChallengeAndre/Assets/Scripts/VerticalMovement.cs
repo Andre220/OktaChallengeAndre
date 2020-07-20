@@ -15,7 +15,6 @@ public class VerticalMovement : MonoBehaviour
         try
         {
             bpo = GetComponent<BasicPhysicsObject>();
-            //bpo.Velocity = new Vector3(0, MovementSpeed, 0);
         }
         catch
         {
@@ -27,7 +26,9 @@ public class VerticalMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bpo.Velocity = new Vector3(0, Input.GetAxisRaw("Vertical") * MovementSpeed, 0);
+        VerticalAxisInput = Input.GetAxisRaw("Vertical");
+
+        bpo.Velocity = new Vector3(0, VerticalAxisInput * MovementSpeed, 0);
     }
 
     void FixedUpdate()
