@@ -5,43 +5,43 @@ using Zenject;
 
 public class StatsManager : MonoBehaviour
 {
-    public PlayerCombatInfo PlayerHealth;
-
-    public GameEvent OnHitted;
+    public int CurrentHealth;
 
     [Inject]
     public ICustomCollision customCollision;
 
     void OnEnable()
     {
-        customCollision.OnCollisionEvent += OnCollision;
+        customCollision.eventBus.Subscribe<OnPhysicsObjectCollide>(OnCollision);
     }
 
     private void OnDestroy()
     {
-        customCollision.OnCollisionEvent -= OnCollision;
+        customCollision.eventBus.Unsubscribe<OnPhysicsObjectCollide>(OnCollision);
     }
 
-    void OnCollision(BasicPhysicsObject bpo) //Forma atual de fazer um "callback" para colisões
+    void OnCollision(OnPhysicsObjectCollide collisionInfo) //Forma atual de fazer um "callback" para colisões
     {
-        print(bpo.name);
-
-        if (bpo.gameObject.tag == "Bullet")
+        if (collisionInfo.Collider.tag == "Bullet" && collisionInfo.Collided.gameObject == this.gameObject)
         {
-            TakeDamage(bpo.gameObject.GetComponent<Bullet>().bulletInfo.Damage);
-            OnHitted.Raise();
+            print(collisionInfo.Collider.name);
+
+            BulletInfo bi = collisionInfo.Collider.GetComponent<Bullet>().bulletInfo;
+            TakeDamage(bi.Damage);
+            //print(CurrentHealth);
+            customCollision.eventBus.Publish<OnDamageTaken>(new OnDamageTaken(CurrentHealth, gameObject.GetComponent<Player>()));
         }
     }
 
     void TakeDamage(int ammount)
     {
-        if (ammount > PlayerHealth.PlayerHP)
+        if (ammount > CurrentHealth)
         {
-            PlayerHealth.PlayerHP = 0;
+            this.CurrentHealth = 0;
         }
         else
         {
-            PlayerHealth.PlayerHP -= ammount;
+            this.CurrentHealth -= ammount;
         }
     }
 }

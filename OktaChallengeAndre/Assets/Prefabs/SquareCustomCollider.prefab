@@ -46,12 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliderType: 1
   Velocity: {x: 0, y: 0, z: 0}
-  isStatic: 0
-  bounce: 0
-  stopOnCollide: 0
   CollidableLayerMask:
     serializedVersion: 2
     m_Bits: 3072
+  PhysicsProperties: {fileID: 11400000, guid: 22edd9b6eb8d9164c8317386019b31f9, type: 2}
   size: {x: 0, y: 0}
   TopEdge: 0
   BottomEdge: 0

@@ -8,6 +8,6 @@ public class CollisionFactoryInstaller : MonoInstaller<CollisionFactoryInstaller
     public override void InstallBindings()
     {
         Container.Bind<ICustomCollision>().To<CustomCollision>().AsSingle();
-        Container.BindFactory<BasicPhysicsObject, BasicPhysicsObject.Factory>().FromComponentInNewPrefab(bulletPrefb);
+        //Container.BindFactory<BasicPhysicsObject, BasicPhysicsObject.Factory>().FromComponentInNewPrefab(bulletPrefb);
     }
 }

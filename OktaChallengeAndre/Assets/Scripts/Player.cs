@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
 
     public void MyTurn(bool myTurn)
     {
+        gameObject.GetComponent<BasicPhysicsObject>().Velocity = Vector2.zero;
         PlayerAim.enabled = myTurn;
         PlayerMovement.enabled = myTurn;
     }

@@ -4,12 +4,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
+using GameEventBus.Interfaces;
 
 public class CustomCollision : ICustomCollision
 {
     public List<BasicPhysicsObject> collidersInScene { get; }
 
-    public event Action<BasicPhysicsObject> OnCollisionEvent;
+    [Inject]
+    public IEventBus eventBus { get; }
+
+    //IEventBus ICustomCollision.eventBus => eventBus;
 
     #region definições da classe e suas propriedades
     public CustomCollision()
@@ -53,8 +57,6 @@ public class CustomCollision : ICustomCollision
                 && (Cy + circle.CircleRadius > square.BottomEdge && square.TopEdge > Cy - circle.CircleRadius ||
                     Cy - circle.CircleRadius < square.TopEdge && square.BottomEdge < Cy + circle.CircleRadius))
             {
-                UnityEngine.MonoBehaviour.print($"Circulo {circle.name} colidiu com {square.name}");
-
                 if (circle.PhysicsProperties.canBounce)
                 {
                     BounceCollision(circle, square);
@@ -71,12 +73,14 @@ public class CustomCollision : ICustomCollision
                         StopOnCollide(square, circle);
                     }
                 }
-                OnCollisionEvent?.Invoke(square);
+                eventBus.Publish(new OnPhysicsObjectCollide(circle, square)); // chamando o evento. Analogo ao "Invoke".
             }
             else
             {
                 return;
             }
+
+            eventBus.Publish(new OnPhysicsObjectCollide(square, circle)); // chamando o evento. Analogo ao "Invoke".
         }
     }
 
@@ -123,6 +127,8 @@ public class CustomCollision : ICustomCollision
             {
                 return;
             }
+
+            eventBus.Publish(new OnPhysicsObjectCollide(square, circle)); // chamando o evento. Analogo ao "Invoke".
         }
     }
 
@@ -174,7 +180,8 @@ public class CustomCollision : ICustomCollision
                 }
             }
 
-            OnCollisionEvent?.Invoke(circleB);
+            //UnityEngine.Debug.Log($"{circleA.name} | {circleB.name}");
+            eventBus.Publish(new OnPhysicsObjectCollide(circleA, circleB)); // chamando o evento. Analogo ao "Invoke".
         }  
     }
 
@@ -225,6 +232,8 @@ public class CustomCollision : ICustomCollision
             {
                 BounceCollision(squareA, squareB);
             }
+
+            eventBus.Publish(new OnPhysicsObjectCollide(squareA, squareB)); // chamando o evento. Analogo ao "Invoke".
         }
     }
     #endregion
@@ -247,7 +256,7 @@ public class CustomCollision : ICustomCollision
 
         Vector2 velocityComponentPerpendicularToTangent = relativeVelocity - velocityComponentOnTangent;
 
-        thisObject.Velocity.x -= 2 * velocityComponentPerpendicularToTangent.x;
+         thisObject.Velocity.x -= 2 * velocityComponentPerpendicularToTangent.x;
         thisObject.Velocity.y -= 2 * velocityComponentPerpendicularToTangent.y;
     }
 

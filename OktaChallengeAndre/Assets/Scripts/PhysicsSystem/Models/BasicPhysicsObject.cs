@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameEventBus;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -24,28 +25,34 @@ public class BasicPhysicsObject : MonoBehaviour
     /// </summary>
     protected List<BasicPhysicsObject> CollidersInLayerMask = new List<BasicPhysicsObject>(); 
 
-    public event Action<GameObject> OnCollision;
-
     [Inject]
     public ICustomCollision iCustomCollision; //CollisionService
 
-    [Inject]
-    public void Construct(ICustomCollision _iCustomCollision)
-    {
-        this.iCustomCollision = _iCustomCollision;
-    }
+    //[Inject]
+    //public void Construct(ICustomCollision _iCustomCollision)
+    //{
+    //    this.iCustomCollision = _iCustomCollision;
+    //}
 
     void OnEnable()
     {
         iCustomCollision.AddColliderToBuffer(this);
-        iCustomCollision.OnCollisionEvent += OnCustomCollision;
+
+        //iCustomCollision.eventBus.Subscribe<OnPhysicsObjectCollide>(OnCustomCollision);
+    }
+
+    void OnDisable()
+    {
+        iCustomCollision.RemoveColliderFromBuffer(this);
+        //iCustomCollision.eventBus.Unsubscribe<OnPhysicsObjectCollide>(OnCustomCollision);
     }
 
     void OnDestroy()
     {
-        iCustomCollision.RemoveColliderFromBuffer(this);
-        iCustomCollision.OnCollisionEvent -= OnCustomCollision;
+        //iCustomCollision.RemoveColliderFromBuffer(this);
+        //iCustomCollision.eventBus.Unsubscribe<OnPhysicsObjectCollide>(OnCustomCollision);
     }
+
 
     public void Start()
     {
@@ -77,9 +84,10 @@ public class BasicPhysicsObject : MonoBehaviour
     /// Retornando o BasicPhysicsObject pois assim podemos retornar qualquer classe derivada dele (CircleCustomCollider e SquareCustomCollider) 
     /// e tambem conseguimos acessar o GameObject em que o colisor esta anexado.
     /// </summary>
-    public void OnCustomCollision(BasicPhysicsObject collision)     
+
+    public void OnCustomCollision(OnPhysicsObjectCollide collisionInfo)     
     {
-        OnCollision?.Invoke(collision.gameObject);
+        //print($"(BasicPhysicsObject) Collided: {collisionInfo.Collided.name} | Collider {collisionInfo.Collider.name}");
     }
 
     /// <summary>
@@ -94,5 +102,6 @@ public class BasicPhysicsObject : MonoBehaviour
         }
     }
 
-    public class Factory : PlaceholderFactory<BasicPhysicsObject> { }  //Informações vindas do vídeo: https://www.youtube.com/watch?v=Gp2_8ihvnvA
+    //Informações vindas do vídeo: https://www.youtube.com/watch?v=Gp2_8ihvnvA e na p[gina https://github.com/modesttree/Zenject/blob/master/Documentation/Factories.md
+    public class Factory : PlaceholderFactory<BasicPhysicsObject> { }  
 }

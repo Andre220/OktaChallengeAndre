@@ -1,64 +1,83 @@
-﻿using System;
+﻿using GameEventBus.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-[RequireComponent(typeof(BasicPhysicsObject))]
-public class Bullet : MonoBehaviour
+//[RequireComponent(typeof(BasicPhysicsObject))]
+public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
 {
     public GameObject Shooter; //Player que disparou
-
-    public GameEvent OnBulletDestroyed;
 
     private int bounceCount;
 
     public BulletInfo bulletInfo;
 
+    IMemoryPool _pool;
+
     [Inject]
     public ICustomCollision customCollision;
 
-    void OnEnable()
+    //[Inject]
+    //public IEventBus eventBus;
+
+    void Start()
     {
-        customCollision.OnCollisionEvent += OnCollision;
+        customCollision.eventBus.Subscribe<OnPhysicsObjectCollide>(OnCollision);
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
-        OnBulletDestroyed.Raise();
-        customCollision.OnCollisionEvent -= OnCollision;
+        //customCollision.eventBus.Unsubscribe<OnPhysicsObjectCollide>(OnCollision);
     }
 
-    void OnCollision(BasicPhysicsObject bpo) //Forma atual de fazer um "callback" para colisões
+    void OnCollision(OnPhysicsObjectCollide collisionInfo) //Forma atual de fazer um "callback" para colisões
     {
-        if (bpo.gameObject != Shooter)
+        if (collisionInfo.Collided.tag == "Player")
         {
-            if (bpo.gameObject.name == "LeftPlayer")
+            //print("(Bullet) " + gameObject.GetInstanceID() + " Collided");
+            try
             {
-                Destroy(gameObject);
+                _pool.Despawn(this);
             }
-            else if (bpo.gameObject.name == "RightPlayer")
+            catch (Exception e)
             {
-                Destroy(gameObject);
+                print(e.ToString());
             }
+
+        }
+        else if(collisionInfo.Collider.tag == "Wall")
+        {
+            if (bounceCount >= 3)
+            {
+                try
+                {
+                    _pool.Despawn(this);
+                }
+                catch (Exception e)
+                {
+                    print(e.ToString());
+                }
+            }
+
+            bounceCount += 1;
         }
     }
 
-    private void OnBecameInvisible()
+    public void OnSpawned(IMemoryPool pool)
     {
-        Destroy(gameObject);
+        _pool = pool;
     }
 
-    //void DestroyGameObject()
-    //{
-    //    customCollision.OnCollisionEvent -= OnCollision;
-    //    OnBulletDestroyed.Raise();
-    //    Destroy(this.gameObject);
-    //}
-
-    IEnumerator DestroyWithDelay(float seconds)
+    public void OnDespawned()
     {
-        yield return new WaitForSeconds(seconds);
+        customCollision.eventBus.Unsubscribe<OnPhysicsObjectCollide>(OnCollision);
+        customCollision.eventBus.Publish(new OnBulletDestroyed());
+        _pool = null;
+    }
 
+    public class Factory : PlaceholderFactory<Bullet> 
+    {
     }
 }

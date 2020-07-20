@@ -1,13 +1,14 @@
-﻿using System;
+﻿using GameEventBus.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public interface ICustomCollision
 {
+    IEventBus eventBus { get; }
+
     List<BasicPhysicsObject> collidersInScene { get; }
-    
-    event Action<BasicPhysicsObject> OnCollisionEvent;
 
     void AddColliderToBuffer(BasicPhysicsObject bpo);
     void RemoveColliderFromBuffer(BasicPhysicsObject bpo);

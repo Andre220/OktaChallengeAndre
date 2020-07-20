@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameEventBus.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,15 +7,14 @@ using Zenject;
 
 public class AimBehaviour : MonoBehaviour
 {
-    public GameEvent OnBulletShooted;
-
-    public event Action<Player> ShootEvent;
-
     public Transform FirePosition;
 
+    //readonly BasicPhysicsObject.Factory bulletFactory;
     [Inject]
-    private BasicPhysicsObject.Factory bulletFactory;
+    readonly Bullet.Factory bulletFactory = null;
 
+    [Inject]
+    public IEventBus eventBus;
 
     public float AimRotateSpeed = 50;
 
@@ -32,14 +32,18 @@ public class AimBehaviour : MonoBehaviour
 
     public void Shoot()
     {
-        OnBulletShooted.Raise();
-        BasicPhysicsObject bullet = bulletFactory.Create();
+        eventBus.Publish(new OnBulletShooted(gameObject.GetComponent<Player>()));
 
-        bullet.transform.position = FirePosition.transform.position;
-        bullet.transform.rotation = gameObject.transform.rotation;
+        var bullet = bulletFactory.Create();
 
-        bullet.GetComponent<Bullet>().Shooter = gameObject;
-        
-        bullet.GetComponent<BasicPhysicsObject>().Velocity = FirePosition.transform.localScale.normalized.x * -transform.right * BulletSpeed;
+        if (bullet != null)
+        {
+            bullet.transform.position = FirePosition.transform.position;
+            bullet.transform.rotation = gameObject.transform.rotation;
+
+            //bullet.GetComponent<Bullet>().Shooter = gameObject;
+
+            bullet.GetComponent<BasicPhysicsObject>().Velocity = FirePosition.transform.localScale.normalized.x * -transform.right * BulletSpeed;
+        }
     }
 }

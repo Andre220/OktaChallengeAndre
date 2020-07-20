@@ -1,35 +1,43 @@
-﻿using System.Collections;
+﻿using GameEventBus.Interfaces;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 using Zenject.SpaceFighter;
 //Injetar via DI nas classes do player.
 //Mudar o estado via Evento.
 public class GameManager : MonoBehaviour
 {
-    public int currentPlayerIndex;
+    public int currentPlayerIndex = 0;
+
     public List<Player> Players;
+
+    [Inject]
+    public IEventBus eventBus;
+
+    void OnEnable()
+    {
+        eventBus.Subscribe<OnBulletShooted>(DisablePlayersInput); // Quando um disparo é efetuado, todos os jogadores ficam imóveis até o momento que a bala é destruida.
+        eventBus.Subscribe<OnBulletDestroyed>(EnableNextPlayer); 
+    }
+
+    void OnDisable()
+    {
+        eventBus.Unsubscribe<OnBulletShooted>(DisablePlayersInput);
+        eventBus.Unsubscribe<OnBulletDestroyed>(EnableNextPlayer); 
+    }
 
     void Start()
     {
-        currentPlayerIndex = 0;
+        Players[currentPlayerIndex].MyTurn(true);
 
-        foreach (Player p in Players)
+        for (int i = 1; i <= Players.Count - 1; i++)
         {
-            if (p == null)
-            {
-                Debug.LogError("Um dos players no GameObject \"GameManager\" está nulo.");
-            }
-            else
-            {
-                if (Players.IndexOf(p) != currentPlayerIndex)
-                {
-                    p.MyTurn(false);
-                }
-            }
+            Players[i].MyTurn(false);
         }
     }
 
-    public void EnableNextPlayer()
+    public void EnableNextPlayer(OnBulletDestroyed o)
     {
         int nextPlayerIndex = currentPlayerIndex + 1 >= Players.Count ? 0 : currentPlayerIndex + 1;
 
@@ -48,8 +56,11 @@ public class GameManager : MonoBehaviour
         currentPlayerIndex = nextPlayerIndex;
     }
 
-    public void DisableCurrentPlayerInput() // Usado quando um player acabou de fazer um disparo e a bala ainda nao terminou seu percurso.
+    public void DisablePlayersInput(OnBulletShooted currentPlayer)
     {
-        Players[currentPlayerIndex].MyTurn(false);
+        foreach (Player p in Players)
+        {
+            p.MyTurn(false);
+        }
     }
 }
