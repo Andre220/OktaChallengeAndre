@@ -3,7 +3,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ContinueButton : MonoBehaviour
+/// <summary>
+/// Ao pressionar o botar para jogar apos selecionar a arma de cada jogador,
+/// e necessario confirmar se ambos os jogadores escolheram armas
+/// </summary>
+
+public class ChooseWeaponWindow : MonoBehaviour
 {
     public AimAndShoot[] PlayersAimAndShoot;
 

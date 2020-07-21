@@ -52,6 +52,9 @@ public class AimAndShoot : MonoBehaviour
             info.Shooter = gameObject;
             info.bulletInfo = ChoosedBullet;
 
+            SpriteRenderer SR = bullet.GetComponent<SpriteRenderer>();
+            SR.color = ChoosedBullet.BulletColor;
+
             BasicPhysicsObject physicsProperties = bullet.GetComponent<BasicPhysicsObject>();
 
             physicsProperties.PhysicsProperties = ChoosedBullet.CustomPhysicsPropertys;

@@ -16,5 +16,6 @@ MonoBehaviour:
   BulletSpeed: 10
   Damage: 50
   CanDamageShooter: 1
+  BulletColor: {r: 0.8058874, g: 0.40450338, b: 0.8490566, a: 1}
   CustomPhysicsPropertys: {fileID: 11400000, guid: 9e84407ff2226b24780d75ed0da5e5d7,
     type: 2}

@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Zenject;
+﻿using UnityEngine;
+
+/// <summary>
+/// Responsavel por habilitar/desabilitar o monobehaviour de cada comportamento basico (AimAndShoot e VerticalMovement) do player,
+/// alem de armazenar uma referencia para os mesmos.
+/// </summary>
 
 [RequireComponent(typeof(VerticalMovement))]
 [RequireComponent(typeof(AimAndShoot))]
 public class Player : MonoBehaviour
 {
-    //[Inject]
-    //public PlayerInfo playerInfo;
-
     public AimAndShoot PlayerAim;
     public VerticalMovement PlayerMovement;
 

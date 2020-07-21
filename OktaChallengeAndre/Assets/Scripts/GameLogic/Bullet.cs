@@ -7,7 +7,14 @@ using Zenject;
 
 /// <summary>
 /// 
+/// Monobehaviour anexado ao prefabs das bullets, por onde fazemos as operacoes 
+/// de Spawnar(Ativar) e Despawnar(Desativar) as balas do pool de balas.
 /// 
+/// tambem armazena quem disparou a bala (Shooter), 
+/// quantos ricochetes ja fez (bounceCount), 
+/// calcula a quantidade de ricochetes restantes e destroi a bala caso tenha ricocheteado o maximo de vezes. 
+/// 
+/// Invoca o evento de quando a bala é destriuda, para liberar o proximo jogador.
 /// 
 /// </summary>
 
@@ -15,12 +22,14 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
 {
     public GameObject Shooter;
 
-    private int bounceCount;
-
     public BulletStats bulletInfo;
 
     IMemoryPool _pool;
 
+    private int bounceCount;
+    
+    private SpriteRenderer SR;
+    
     [Inject]
     public ICustomCollision customCollision;
 

@@ -15,5 +15,7 @@ MonoBehaviour:
   MaxBounces: 3
   BulletSpeed: 10
   Damage: 10
+  CanDamageShooter: 0
+  BulletColor: {r: 0.11374155, g: 0.33962262, b: 0.118300304, a: 1}
   CustomPhysicsPropertys: {fileID: 11400000, guid: 9e84407ff2226b24780d75ed0da5e5d7,
     type: 2}

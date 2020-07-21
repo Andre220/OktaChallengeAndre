@@ -1,7 +1,15 @@
 ﻿using GameEventBus.Events;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
+/// <summary>
+/// 
+/// Evento de colisao entre dois objetos. Repare que ele recebe 
+/// dois BasicPhysicsObject, que podem ser tanto um circulo quanto um quadrado,
+/// permintindo que este evento possa retornar qualquer tipo de colisao
+/// (circulo/circulo ou circulo/quadrado ou quadrado/quadrado)
+/// 
+/// Exemplo em https://github.com/ThomasKomarnicki/GameEventBus
+/// 
+/// </summary>
 
 public class OnPhysicsObjectCollide : EventBase
 {

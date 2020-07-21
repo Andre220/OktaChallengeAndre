@@ -16,6 +16,8 @@ using UnityEngine;
 /// por "escutar" eventos de colisao e descobrir se esse evento inclui uma bala
 /// e o player em que ela(StatsManager) esta anexada.
 /// 
+/// Exemplo em https://github.com/ThomasKomarnicki/GameEventBus
+/// 
 /// </summary>
 
 public class OnDamageTaken : EventBase

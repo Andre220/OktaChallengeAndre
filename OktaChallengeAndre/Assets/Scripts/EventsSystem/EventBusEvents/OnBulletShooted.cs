@@ -9,6 +9,7 @@ using UnityEngine;
 /// passando para os que assinarem este evento QUEM(Player) fez o disparo.
 /// 
 /// Exemplo em https://github.com/ThomasKomarnicki/GameEventBus
+/// 
 /// </summary>
 
 public class OnBulletShooted : EventBase

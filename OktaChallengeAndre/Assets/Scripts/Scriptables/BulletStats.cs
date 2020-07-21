@@ -15,5 +15,7 @@ public class BulletStats : ScriptableObject
 
     public bool CanDamageShooter;
 
+    public Color BulletColor;
+
     public CustomPhysicsProperties CustomPhysicsPropertys;
 }
