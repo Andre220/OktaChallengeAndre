@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
+/// 
+/// Evento chamado quando um projetil e disparado, 
+/// passando para os que assinarem este evento QUEM(Player) fez o disparo.
+/// 
 /// Exemplo em https://github.com/ThomasKomarnicki/GameEventBus
 /// </summary>
 

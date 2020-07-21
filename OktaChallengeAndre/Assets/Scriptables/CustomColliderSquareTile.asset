@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d7ddbb6ed5730343b0d38455e278fac, type: 3}
-  m_Name: Fantasma
+  m_Script: {fileID: 11500000, guid: 25d5791b6b65b704795bef669c44976b, type: 3}
+  m_Name: CustomColliderSquareTile
   m_EditorClassIdentifier: 
-  MaxBounces: 2
-  BulletSpeed: 15
-  Damage: 5
-  CustomPhysicsPropertys: {fileID: 11400000, guid: 9e84407ff2226b24780d75ed0da5e5d7,
-    type: 2}
+  sprite: {fileID: 21300000, guid: 770de3f0f25315b4bbf93d8abf9297f5, type: 3}
+  prefab: {fileID: 3094120358038281905, guid: ef4e8281f34e22e4caba05d088e20c06, type: 3}

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4309864185419153174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.27, y: -0.27, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   CollidableLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1280
   PhysicsProperties: {fileID: 0}
   CircleRadius: 0
   CircleDiameter: 0

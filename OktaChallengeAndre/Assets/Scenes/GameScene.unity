@@ -179,10 +179,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
+    m_FontSize: 18
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: JOGAR!
 --- !u!222 &150528327
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -477,7 +477,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Fantasma
+  m_Text: KillerQueen
 --- !u!222 &334873883
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1007,7 +1007,7 @@ GameObject:
   - component: {fileID: 706556339}
   - component: {fileID: 706556338}
   m_Layer: 5
-  m_Name: (Button)Fantasma
+  m_Name: (Button)KillerQueen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2780,7 +2780,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Fantasma
+  m_Text: KillerQueen
 --- !u!222 &1521829964
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2983,7 +2983,7 @@ GameObject:
   - component: {fileID: 1658941792}
   - component: {fileID: 1658941791}
   m_Layer: 5
-  m_Name: (Button)Fantasma
+  m_Name: (Button)KillerQueen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4271,7 +4271,7 @@ PrefabInstance:
     - target: {fileID: 6769606383903975934, guid: d79b23df45c766545b715d13aca8f002,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6769606384664885138, guid: d79b23df45c766545b715d13aca8f002,
         type: 3}
@@ -4378,7 +4378,12 @@ PrefabInstance:
     - target: {fileID: 8575697226651296193, guid: d79b23df45c766545b715d13aca8f002,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8575697226651296197, guid: d79b23df45c766545b715d13aca8f002,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8575697226692110061, guid: d79b23df45c766545b715d13aca8f002,
         type: 3}

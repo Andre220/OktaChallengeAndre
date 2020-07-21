@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d98b2efd309e2434ba583df4b02dd9ec, type: 3}
-  m_Name: PlayerRight
+  m_Script: {fileID: 11500000, guid: 8d7ddbb6ed5730343b0d38455e278fac, type: 3}
+  m_Name: Speedster
   m_EditorClassIdentifier: 
-  StartPlayerHP: 100
-  PlayerHP: 100
+  MaxBounces: 2
+  BulletSpeed: 20
+  Damage: 2
+  CanDamageShooter: 0
+  CustomPhysicsPropertys: {fileID: 11400000, guid: 9e84407ff2226b24780d75ed0da5e5d7,
+    type: 2}

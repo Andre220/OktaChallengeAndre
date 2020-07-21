@@ -6,8 +6,24 @@ using UnityEngine;
 using System.Runtime.InteropServices;
 using GameEventBus.Interfaces;
 
+/// <summary>
+/// Escrita por: André Felipe dos Santos
+/// 
+/// 
+/// Esta é a classe principal do sistema de física.
+/// 
+/// Ela possui a lógica para detectar colisões entre objetos circulares (classe CustomCircleCollider) 
+/// e quadrados ( classe CustomSquareCollider).
+/// 
+/// Também realiza os cálculos referentes as reações físicas dessas colisões, 
+/// como ricochetear (BounceCollision) ou parar de se mover ao colidir com outro objeto (StopOnCollide).
+/// 
+/// OBS: Esta classe não é anexada a game objects ou instanciada. Ela implementa a interface 
+/// ICustomCollision e é injetada em toda classe que precisa desta interface
+/// 
+/// </summary>
 public class CustomCollision : ICustomCollision
-{
+{    
     public List<BasicPhysicsObject> collidersInScene { get; }
 
     [Inject]
@@ -240,23 +256,30 @@ public class CustomCollision : ICustomCollision
     #region Custom Behaviour
     public void BounceCollision(BasicPhysicsObject thisObject, BasicPhysicsObject other)
     {
-        Vector2 tangent;
-        tangent.y = -(other.transform.position.x - thisObject.transform.position.x);
-        tangent.x = other.transform.position.y - thisObject.transform.position.y;
+        if (thisObject.PhysicsProperties.canBounce)
+        {
+            Vector2 tangent;
+            tangent.y = -(other.transform.position.x - thisObject.transform.position.x);
+            tangent.x = other.transform.position.y - thisObject.transform.position.y;
 
-        tangent.Normalize();
+            tangent.Normalize();
 
-        Vector2 relativeVelocity = new Vector2(thisObject.Velocity.x - other.Velocity.x, thisObject.Velocity.y - other.Velocity.y);
+            Vector2 relativeVelocity = new Vector2(thisObject.Velocity.x - other.Velocity.x, thisObject.Velocity.y - other.Velocity.y);
 
-        float lenght = Vector2.Dot(relativeVelocity, tangent);
+            float lenght = Vector2.Dot(relativeVelocity, tangent);
 
-        Vector2 velocityComponentOnTangent;
-        velocityComponentOnTangent = tangent * lenght;
+            Vector2 velocityComponentOnTangent;
+            velocityComponentOnTangent = tangent * lenght;
 
-        Vector2 velocityComponentPerpendicularToTangent = relativeVelocity - velocityComponentOnTangent;
+            Vector2 velocityComponentPerpendicularToTangent = relativeVelocity - velocityComponentOnTangent;
 
-         thisObject.Velocity.x -= 2 * velocityComponentPerpendicularToTangent.x;
-        thisObject.Velocity.y -= 2 * velocityComponentPerpendicularToTangent.y;
+            thisObject.Velocity.x -= 2 * velocityComponentPerpendicularToTangent.x;
+            thisObject.Velocity.y -= 2 * velocityComponentPerpendicularToTangent.y;
+        }
+        else
+        {
+            return;
+        }
     }
 
     public void StopOnCollide(BasicPhysicsObject toStop, BasicPhysicsObject other) // Faz o objeto parar de se mover caso colida

@@ -211,11 +211,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d8b58d59e92a0e49bc1a60ab447224c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliderType: 0
   Velocity: {x: 0, y: 0, z: 0}
   CollidableLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2304
   PhysicsProperties: {fileID: 0}
   CircleRadius: 0
   CircleDiameter: 0
@@ -245,9 +244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef7817ea9c5f574e89652b6c5b1e28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChoosedBullet: {fileID: 0}
   FirePosition: {fileID: 2447384000075411750}
   AimRotateSpeed: 50
-  BulletSpeed: 7
 --- !u!114 &2447384002112898650
 MonoBehaviour:
   m_ObjectHideFlags: 0

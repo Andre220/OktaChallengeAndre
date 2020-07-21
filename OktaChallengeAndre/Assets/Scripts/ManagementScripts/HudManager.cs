@@ -8,9 +8,8 @@ using Zenject;
 
 public class HudManager : MonoBehaviour
 {
-    [Description("Os indice dos textos deve combinar com o indice a lista de players. O Texto 0 deve ser do Jogador no indice 0")]
+    [Tooltip("Os indice dos textos deve combinar com o indice a lista de players. O Texto 0 deve ser do Jogador no indice 0")]
     public List<Text> PlayerLifeHUD;
-    //public List<Player> Players;
 
     public GameObject GameOverHud;
     public Text GameOverText;
@@ -29,6 +28,7 @@ public class HudManager : MonoBehaviour
     private void OnDestroy()
     {
         eventBus.Unsubscribe<OnDamageTaken>(OnDamageTaken);
+        eventBus.Unsubscribe<OnPlayerDied>(OnPlayerDie);
     }
 
     void OnDamageTaken(OnDamageTaken DamageTaken)

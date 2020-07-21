@@ -44,12 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b988362dbc9f96d4b9f32a6601788e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliderType: 0
   Velocity: {x: 0, y: 0, z: 0}
   CollidableLayerMask:
     serializedVersion: 2
-    m_Bits: 0
-  PhysicsProperties: {fileID: 0}
+    m_Bits: 3840
+  PhysicsProperties: {fileID: 11400000, guid: 22edd9b6eb8d9164c8317386019b31f9, type: 2}
   size: {x: 0, y: 0}
   TopEdge: 0
   BottomEdge: 0

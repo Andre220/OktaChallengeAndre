@@ -5,6 +5,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// Classe responsavel por:
+/// 
+/// rotacionar o player - e consequentemente a mira dele - conforme o eixo HORIZONTAL da Unity e pressionado
+/// 
+/// Criar (esta sendo utilizado o Pool do Zenject. Isso significa que ao Spawnar, 
+/// a bala e ativada no hierarchy, e ao Despawnar, ela e desativada) a bala ao presionar o botao ESPACO.
+/// </summary>
 public class AimAndShoot : MonoBehaviour
 {
     public BulletStats ChoosedBullet;
@@ -19,8 +27,6 @@ public class AimAndShoot : MonoBehaviour
 
     public float AimRotateSpeed = 50;
 
-    //public float BulletSpeed = 7;
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -33,7 +39,7 @@ public class AimAndShoot : MonoBehaviour
 
     public void Shoot()
     {
-        eventBus.Publish(new OnBulletShooted(gameObject.GetComponent<Player>()));
+        eventBus.Publish(new OnBulletShooted(gameObject.GetComponent<Player>())); //Evento de quando uma bala e disparada, fazendo todos os jogadores pararem de efetuar inputs.
 
         var bullet = bulletFactory.Create();
 

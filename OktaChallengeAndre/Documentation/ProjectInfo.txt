@@ -1,4 +1,7 @@
 OktaChallenge:
 
-Unity Version : 2019.4.1f1
-Visual Studio Version: 
+Unity Version : 2019.4.1f1				
+Visual Studio Version: 16.6.6				
+Unity Api Compatibility Level: .NetStandard 2.0		
+Extenjent/Zenject: 9.2.0				https://github.com/modesttree/Zenject
+ThomasKomarnicki/GameEventBus: 9.2.0			https://github.com/ThomasKomarnicki/GameEventBus

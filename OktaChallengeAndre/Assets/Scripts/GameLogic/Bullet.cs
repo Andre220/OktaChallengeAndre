@@ -5,7 +5,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-//[RequireComponent(typeof(BasicPhysicsObject))]
+/// <summary>
+/// 
+/// 
+/// 
+/// </summary>
+
 public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
 {
     public GameObject Shooter;
@@ -36,17 +41,38 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
     {
     }
 
-    void OnCollision(OnPhysicsObjectCollide collisionInfo) //Forma atual de fazer um "callback" para colisões
+    void OnCollision(OnPhysicsObjectCollide collisionInfo)
     {
-        if (collisionInfo.Collided.tag == "Player" && collisionInfo.Collided.name != Shooter.name)
+        if (collisionInfo.Collided.tag == "Player")
         {
-            try
+            if (collisionInfo.Collided.name != Shooter.name)
             {
-                _pool.Despawn(this);
+                try
+                {
+                    _pool.Despawn(this);
+                }
+                catch (Exception e)
+                {
+                    print(e.ToString());
+                }
             }
-            catch (Exception e)
+            else
             {
-                print(e.ToString());
+                if (this.bounceCount >= bulletInfo.MaxBounces)
+                {
+                    try
+                    {
+                        _pool.Despawn(this);
+                    }
+                    catch (Exception e)
+                    {
+                        print(e.ToString());
+                    }
+                }
+                else
+                {
+                    bounceCount += 1;
+                }
             }
         }
         else if(collisionInfo.Collider.tag == "Wall")
@@ -55,7 +81,6 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
             {
                 try
                 {
-                    this.bounceCount = 0;
                     _pool.Despawn(this);
                 }
                 catch (Exception e)
@@ -70,7 +95,7 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
         }
     }
 
-    IEnumerator DestroyAfterSeconds() //prevent bullet from get out scene for ever.
+    IEnumerator DestroyAfterSeconds() //prevent bullet from get out scene forever.
     {
         yield return new WaitForSeconds(10);
         _pool.Despawn(this);
@@ -78,7 +103,7 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
 
     public void OnSpawned(IMemoryPool pool)
     {
-        _pool = pool;
+        _pool = pool; //Apenas ativando a bullet do pool. Nao devemos registrar eventos aqui.
     }
 
     public void OnDespawned()

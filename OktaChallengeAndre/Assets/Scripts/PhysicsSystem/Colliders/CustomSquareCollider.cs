@@ -1,5 +1,13 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Classe filha do BasicPhysicsObject, responsavel por:
+/// 
+/// Descrever as propriedades de um quadrado, para ser utilizada durante os calculos de colisão
+/// Chamar as funções de teste de colisão vindas da interface ICustomCollision (que está na classe pai)
+/// levando em consideração se a colisão é entre quadrados ou entre um quadrado e um circulo.
+/// 
+/// </summary>
 public class CustomSquareCollider : BasicPhysicsObject
 {
     public Vector2 size;
@@ -13,12 +21,11 @@ public class CustomSquareCollider : BasicPhysicsObject
     {
         size = new Vector2(transform.localScale.x, transform.localScale.y);
 
-        /*Pegando as bordas deste quadrado*/
-        TopEdge = transform.position.y + transform.localScale.y / 2; // Calculo da borda superior deste objeto.                  
-        BottomEdge = transform.position.y - transform.localScale.y / 2; // Calculo da borda inferior deste objeto.
-        LeftEdge = transform.position.x - transform.localScale.x / 2; // Calculo da borda esquerda deste objeto.
-        RightEdge = transform.position.x + transform.localScale.x / 2; // Calculo da borda direita deste objeto.
-        
+        TopEdge = transform.position.y + transform.localScale.y / 2; // Calculo da borda superior do quadrado.                  
+        BottomEdge = transform.position.y - transform.localScale.y / 2; // Calculo da borda inferior do quadrado.  
+        LeftEdge = transform.position.x - transform.localScale.x / 2; // Calculo da borda esquerda do quadrado.  
+        RightEdge = transform.position.x + transform.localScale.x / 2; // Calculo da borda direita do quadrado.  
+
         foreach (BasicPhysicsObject Other in iCustomCollision.collidersInScene)
         {
             if (this.PhysicsProperties != null && !this.PhysicsProperties.isStatic && Other != null)

@@ -1,5 +1,13 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Classe filha do BasicPhysicsObject, responsavel por:
+/// 
+/// Descrever as propriedades de um circulo, para ser utilizada durante os calculos de colisão
+/// Chamar as funções de teste de colisão vindas da interface ICustomCollision (que está na classe pai)
+/// levando em consideração se a colisão é entre Circulos ou entre um circulo e um quadrado.
+/// 
+/// </summary>
 public class CustomCircleCollider : BasicPhysicsObject
 {
     public float CircleRadius, CircleDiameter;
@@ -15,7 +23,6 @@ public class CustomCircleCollider : BasicPhysicsObject
         {
             if(this.PhysicsProperties != null && !this.PhysicsProperties.isStatic && Other != null)
             {
-                //print($"{gameObject.name} can collide with {bpo.gameObject.name}");
                 if (Other is CustomCircleCollider)
                 {
                     iCustomCollision.CollisionBetweenCircleAndCircle(this, (CustomCircleCollider)Other);
