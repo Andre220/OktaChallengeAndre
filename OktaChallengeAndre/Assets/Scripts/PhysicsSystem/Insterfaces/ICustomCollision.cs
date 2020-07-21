@@ -13,8 +13,8 @@ public interface ICustomCollision
     void AddColliderToBuffer(BasicPhysicsObject bpo);
     void RemoveColliderFromBuffer(BasicPhysicsObject bpo);
 
-    void CollisionBetweenCircleAndSquare(CircleModel circle, SquareModel square);
-    void CollisionBetweenSquareAndCircle(SquareModel square, CircleModel circle);
-    void CollisionBetweenCircleAndCircle(CircleModel circleA, CircleModel circleB);
-    void CollisionBetweenSquareAndSquare(SquareModel squareA, SquareModel squareB);
+    void CollisionBetweenCircleAndSquare(CustomCircleCollider circle, CustomSquareCollider square);
+    void CollisionBetweenSquareAndCircle(CustomSquareCollider square, CustomCircleCollider circle);
+    void CollisionBetweenCircleAndCircle(CustomCircleCollider circleA, CustomCircleCollider circleB);
+    void CollisionBetweenSquareAndSquare(CustomSquareCollider squareA, CustomSquareCollider squareB);
 }

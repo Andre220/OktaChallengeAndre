@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(fileName ="CustomColliderSquareTile", menuName = "scriptables/CustomTiles/CustomColliderSquare", order = 0)]
+[CreateAssetMenu(fileName ="CustomColliderSquareTile", menuName = "Scriptables/CustomTiles/CustomColliderSquare", order = 0)]
 public class CustomTile : TileBase
 {
     public Sprite sprite;

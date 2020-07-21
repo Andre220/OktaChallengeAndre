@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe00ce248a62715449b52b077cece972, type: 3}
-  m_Name: Bullet
+  m_Script: {fileID: 11500000, guid: 8d7ddbb6ed5730343b0d38455e278fac, type: 3}
+  m_Name: Triplo
   m_EditorClassIdentifier: 
-  isStatic: 0
-  canBounce: 1
-  stopOnCollide: 1
+  MaxBounces: 3
+  BulletSpeed: 20
+  Damage: 2
+  CustomPhysicsPropertys: {fileID: 11400000, guid: 9e84407ff2226b24780d75ed0da5e5d7,
+    type: 2}

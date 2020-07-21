@@ -33,7 +33,7 @@ public class CustomCollision : ICustomCollision
     #endregion
 
     #region Calculando colisao com base no formato dos objetos
-    public void CollisionBetweenCircleAndSquare(CircleModel circle, SquareModel square)
+    public void CollisionBetweenCircleAndSquare(CustomCircleCollider circle, CustomSquareCollider square)
     {
         if (circle == null || square == null)
         {
@@ -84,7 +84,7 @@ public class CustomCollision : ICustomCollision
         }
     }
 
-    public void CollisionBetweenSquareAndCircle(SquareModel square, CircleModel circle)
+    public void CollisionBetweenSquareAndCircle(CustomSquareCollider square, CustomCircleCollider circle)
     {
         if (square == null || circle == null)
         {
@@ -132,7 +132,7 @@ public class CustomCollision : ICustomCollision
         }
     }
 
-    public void CollisionBetweenCircleAndCircle(CircleModel circleA, CircleModel circleB)
+    public void CollisionBetweenCircleAndCircle(CustomCircleCollider circleA, CustomCircleCollider circleB)
     {
         if (circleA == null || circleB == null)
         {
@@ -160,23 +160,22 @@ public class CustomCollision : ICustomCollision
                 , angle * distanceBetweenCircles * Time.deltaTime
                 , 0);
 
-            if (circleB.PhysicsProperties.isStatic)
+            if (circleB.PhysicsProperties != null)
             {
-
-            }
-            else if (circleB.PhysicsProperties.canBounce)
-            {
-                BounceCollision(circleA, circleB);
-            }
-            else if (circleB.PhysicsProperties.stopOnCollide || circleA.PhysicsProperties.stopOnCollide)
-            {
-                if (circleA.PhysicsProperties.stopOnCollide)
+                if (circleB.PhysicsProperties.canBounce)
                 {
-                    StopOnCollide(circleA, circleB);
+                    BounceCollision(circleA, circleB);
                 }
-                else
+                else if (circleB.PhysicsProperties.stopOnCollide || circleA.PhysicsProperties.stopOnCollide)
                 {
-                    StopOnCollide(circleB, circleA);
+                    if (circleA.PhysicsProperties.stopOnCollide)
+                    {
+                        StopOnCollide(circleA, circleB);
+                    }
+                    else
+                    {
+                        StopOnCollide(circleB, circleA);
+                    }
                 }
             }
 
@@ -185,7 +184,7 @@ public class CustomCollision : ICustomCollision
         }  
     }
 
-    public void CollisionBetweenSquareAndSquare(SquareModel squareA, SquareModel squareB)
+    public void CollisionBetweenSquareAndSquare(CustomSquareCollider squareA, CustomSquareCollider squareB)
     {
         if (squareA == null || squareB == null)
         {

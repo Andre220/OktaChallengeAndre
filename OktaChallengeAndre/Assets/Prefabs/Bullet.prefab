@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4309864185419153174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.27, y: -0.27, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -92,15 +92,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4309864185419153174}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2fea45636a1d744f9479330cc8b600d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d8b58d59e92a0e49bc1a60ab447224c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   colliderType: 0
   Velocity: {x: 0, y: 0, z: 0}
   CollidableLayerMask:
     serializedVersion: 2
-    m_Bits: 1792
-  PhysicsProperties: {fileID: 11400000, guid: 9e84407ff2226b24780d75ed0da5e5d7, type: 2}
+    m_Bits: 0
+  PhysicsProperties: {fileID: 0}
   CircleRadius: 0
   CircleDiameter: 0
 --- !u!114 &4194071244074030558
@@ -116,5 +116,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Shooter: {fileID: 0}
-  OnBulletDestroyed: {fileID: 11400000, guid: c9605781dd5042d41be07c3198904a58, type: 2}
-  bulletInfo: {fileID: 11400000, guid: bbfbea6b8e67c4f43ab602e0b6478868, type: 2}
+  bulletInfo: {fileID: 0}
