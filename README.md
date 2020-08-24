@@ -51,9 +51,6 @@ ou mudar de posição, para evadir do próximo tiro, mas precisando ajustar nova
 
 
 
-
-
-
 Frameworks e Softwares utilizados:
 
 Unity Version : 2019.4.1f1
@@ -70,12 +67,6 @@ Framework de injeção de dependência para Unity3D, com o package importado loc
 
 ThomasKomarnicki/GameEventBus: 9.2.0
 Sistema de eventos para Unity3D, com o package importado localizado na pasta ImportedPackages.
-
-
-
-
-
-
 
 Estrutura do projeto:
 
@@ -123,12 +114,6 @@ CanBounce - Caso seja verdadeiro, ao colidir com outro objeto, este objeto será
 
 StopOnCollide - Caso seja verdadeiro, ao colidir com outro objeto, este objeto ficará parado na posição onde colidiu não será impulsionado.
 
-
-
-
-
-
-
 Configuração do projeto
 
 Esta seção visa apresentar um passo a passo de como configurar uma cena neste projeto.
@@ -156,14 +141,7 @@ respectivamente.
 
 Para começar, gostaria de mencionar que caso tenha alguma dúvida sobre algum parâmetro
 
-
-
 OBS: Para mudar a orientação dos players no inspector, utilizar a rotação Y. Modificar a escala dos objetos pode ocasionar comportamentos inesperados.
-
-
-
-
-Referências e manuais
 
 Referências e manuais
 
