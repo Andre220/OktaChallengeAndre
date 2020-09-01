@@ -2,10 +2,6 @@
 
 Repositório para armazenar o projeto do pong que fiz para um processo seletivo
 </br>
-
-## Oktapong Documentação
-
-</br>
 Projeto e documentação desenvolvidos por: **André Felipe dos Santos** </br>
 
 # Sumário:
