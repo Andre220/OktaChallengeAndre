@@ -11,14 +11,13 @@ Projeto e documentação desenvolvidos por: **André Felipe dos Santos** </br>
 # Sumário:
 
 * [Introdução](#introdu%C3%A7%C3%A3o)
-* [**Controles**](#controles]
-* [**Projéteis**]()
-* [**Frameworks e softwares utilizados**]()
-* [**Estrutura do projeto**]()
-* [**ScriptableObjects**]()
-* [**Configuração do projeto**]()
-* [**Melhorias Futuras**]()
-* [**Referências e manuais**]()
+* [**Controles**](#controles)
+* [**Projéteis**](#proj%C3%A9teis)
+* [**Frameworks e softwares utilizados**](#frameworks-e-softwares-utilizados)
+* [**Estrutura do projeto**](#estrutura-do-projeto)
+* [**ScriptableObjects**](#scriptableobjects)
+* [**Configuração do projeto**](#configura%C3%A7%C3%A3o-do-projeto)
+* [**Referências e manuais**](https://github.com/Andre220/OktaChallengeAndre#refer%C3%AAncias-e-manuais)
 
 ### Introdução:
 
