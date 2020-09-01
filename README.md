@@ -50,20 +50,20 @@ ou mudar de posição, para evadir do próximo tiro, mas precisando ajustar nova
 
 ### Frameworks e Softwares utilizados:
 
-**GameEngine**
-**Unity Version : 2019.4.1f1**
+* **GameEngine** </br>
+Unity Version : 2019.4.1f1
 
-**Visual Studio Version: 16.6.6**
-**IDE de desenvolvimento**
+* **IDE de desenvolvimento**</br>
+Visual Studio Version: 16.6.6
 
-**.NET api utilizada pelo projeto na Unity**
-**Unity Api Compatibility Level: .NetStandard 2.0**
+* **.NET api utilizada pelo projeto na Unity**</br>
+Unity Api Compatibility Level: .NetStandard 2.0
 
-**Framework de injeção de dependência para Unity3D, com o package importado localizado na pasta localizado na pasta ImportedPackages.**
-**Extenjent/Zenject: 9.2.0**
+* **Framework de injeção de dependência para Unity3D, com o package importado localizado na pasta localizado na pasta ImportedPackages.**</br>
+Extenjent/Zenject: 9.2.0
 
-**Sistema de eventos para Unity3D, com o package importado localizado na pasta ImportedPackages.**
-**ThomasKomarnicki/GameEventBus: 9.2.0**
+* **Sistema de eventos para Unity3D, com o package importado localizado na pasta ImportedPackages.**</br>
+ThomasKomarnicki/GameEventBus: 9.2.0
 
 ### Estrutura do projeto:
 
