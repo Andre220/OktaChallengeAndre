@@ -10,15 +10,15 @@ Projeto e documentação desenvolvidos por: **André Felipe dos Santos** </br>
 
 # Sumário:
 
-* **Introdução**
-* **Controles**
-* **Projéteis**
-* **Frameworks e softwares utilizados**
-* **Estrutura do projeto**
-* **ScriptableObjects**
-* **Configuração do projeto*** 
-* **Melhorias Futuras**
-* **Referências e manuais**
+* (**Introdução**)[https://github.com/Andre220/OktaChallengeAndre#introdu%C3%A7%C3%A3o]
+* (**Controles**)[https://github.com/Andre220/OktaChallengeAndre#controles]
+* (**Projéteis**)[https://github.com/Andre220/OktaChallengeAndre/blob/master/README.md#]
+* (**Frameworks e softwares utilizados**)[https://github.com/Andre220/OktaChallengeAndre/blob/master/README.md#]
+* (**Estrutura do projeto**)[https://github.com/Andre220/OktaChallengeAndre/blob/master/README.md#]
+* (**ScriptableObjects**)[https://github.com/Andre220/OktaChallengeAndre/blob/master/README.md#]
+* (**Configuração do projeto**)[https://github.com/Andre220/OktaChallengeAndre/blob/master/README.md#]
+* (**Melhorias Futuras**)[https://github.com/Andre220/OktaChallengeAndre/blob/master/README.md#]
+* (**Referências e manuais**)[https://github.com/Andre220/OktaChallengeAndre/blob/master/README.md#]
 
 ### Introdução:
 
