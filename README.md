@@ -6,7 +6,7 @@ Projeto e documentação desenvolvidos por: **André Felipe dos Santos** </br>
 
 # Sumário:
 
-* [Introdução](#introdu%C3%A7%C3%A3o)
+* [**Introdução**](#introdu%C3%A7%C3%A3o)
 * [**Controles**](#controles)
 * [**Projéteis**](#proj%C3%A9teis)
 * [**Frameworks e softwares utilizados**](#frameworks-e-softwares-utilizados)
