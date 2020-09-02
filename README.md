@@ -32,10 +32,10 @@ Projeto e documentação desenvolvidos por: **André Felipe dos Santos** </br>
 
 Existem 4 projéteis já criados, sendo eles:
 
-1. Ricochete - Maior número de vezes que pode ricochetear antes de ser destruído.
-2. Heavy Bullet - Dano alto, velocidade de movimento baixa.
-3. Speedster - Dano baixo, velocidade de movimento alta.
-4. Killer Queen - Dano altíssimo, porém, pode causar dano ao jogador que o disparou também.
+1. **Ricochete** - Maior número de vezes que pode ricochetear antes de ser destruído.
+2. **Heavy Bullet** - Dano alto, velocidade de movimento baixa.
+3. **Speedster** - Dano baixo, velocidade de movimento alta.
+4. **Killer Queen** - Dano altíssimo, porém, pode causar dano ao jogador que o disparou também.
 
 Após um jogador disparar um projétil, todos os jogadores ficam imóveis e incapazes de atirar, enquanto este projétil não for destruído (seja ricocheteando ou colidindo com outro player).
 
