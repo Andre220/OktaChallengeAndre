@@ -13,7 +13,7 @@ Projeto e documentação desenvolvidos por: **André Felipe dos Santos** </br>
 * [**Estrutura do projeto**](#estrutura-do-projeto)
 * [**ScriptableObjects**](#scriptableobjects)
 * [**Configuração do projeto**](#configura%C3%A7%C3%A3o-do-projeto)
-* [**Referências e manuais**](https://github.com/Andre220/OktaChallengeAndre#refer%C3%AAncias-e-manuais)
+* [**Referências e manuais**](#refer%C3%AAncias-e-manuais)
 
 ### Introdução:
 
